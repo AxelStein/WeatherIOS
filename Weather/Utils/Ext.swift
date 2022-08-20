@@ -52,6 +52,13 @@ extension String {
         let date = formatter.date(from: self)
         return date?.dateText ?? ""
     }
+    
+    var timeText: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let date = formatter.date(from: self)
+        return date?.timeText ?? ""
+    }
 }
 
 extension Float {

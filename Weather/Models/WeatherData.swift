@@ -8,6 +8,11 @@
 import Foundation
 import UIKit
 
+struct CurrentWeather: Codable {
+    let count: Int
+    let data: [ForecastData]
+}
+
 struct WeatherDetail: Codable {
     let icon: String
     let code: Int
@@ -26,40 +31,38 @@ struct DailyForecast: Codable {
     let data: [ForecastData]
 }
 
-struct HourlyForecast: Codable {
-    let data: [ForecastData]
-}
-
 struct ForecastData: Codable {
     let valid_date: String?
     let timestamp_utc: String?
     let temp: Float
-    let min_temp: Float
-    let max_temp: Float
+    let min_temp: Float?
+    let max_temp: Float?
     let wind_spd: Float // Wind speed (Default m/s)
     let wind_cdir: String // Wind direction
     let wind_cdir_full: String // Verbal wind direction
-    let sunrise_ts: Int64
-    let sunset_ts: Int64
+    let sunrise_ts: Int64?
+    let sunset_ts: Int64?
     let weather: WeatherDetail
-    let pop: Int // Probability of Precipitation (%)
+    let pop: Int? // Probability of Precipitation (%)
     let precip: Float // Accumulated liquid equivalent precipitation (default mm)
     let snow: Int // Accumulated snowfall (default mm)
-    let snow_depth: Int // Snow Depth (default mm)
+    let snow_depth: Int? // Snow Depth (default mm)
     let rh: Int // Average relative humidity (%)
     let clouds: Int // Average total cloud coverage (%)
     let vis: Float // Visibility (km)
     let uv: Float // Maximum UV Index (0-11+)
     let pres: Float // Average pressure (mb)
+    let aqi: Int? // Air Quality Index [US - EPA standard 0 - +500]
+    let ob_time: String? // Last observation time (YYYY-MM-DD HH:MM).
 }
 
 extension ForecastData {
     var sunriseDate: Date {
-        return Date(timeIntervalSince1970: TimeInterval(self.sunrise_ts))
+        return Date(timeIntervalSince1970: TimeInterval(self.sunrise_ts!))
     }
     
     var sunsetDate: Date {
-        return Date(timeIntervalSince1970: TimeInterval(self.sunset_ts))
+        return Date(timeIntervalSince1970: TimeInterval(self.sunset_ts!))
     }
 }
 

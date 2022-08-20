@@ -8,16 +8,26 @@
 import Foundation
 import UIKit
 
+private let imageCache = NSCache<AnyObject, AnyObject>()
+private let loadQueue = DispatchQueue(label: "img-load-queue")
+
 extension UIImageView {
+    
     func load(src: String) {
         guard let url = URL(string: src) else { return }
-        let urlSession = URLSession(configuration: .default)
-        let task = urlSession.dataTask(with: url) { data, res, err in
+        
+        var request = URLRequest(url: url)
+        request.cachePolicy = .returnCacheDataElseLoad
+        
+        let task = URLSession.shared.dataTask(with: request) { data, res, err in
             guard let data = data, err == nil else {
                 return
             }
-            DispatchQueue.main.async {
-                self.image = UIImage(data: data)
+            if let img = UIImage(data: data) {
+                imageCache.setObject(img, forKey: url as AnyObject)
+                DispatchQueue.main.async {
+                    self.image = img
+                }
             }
         }
         task.resume()

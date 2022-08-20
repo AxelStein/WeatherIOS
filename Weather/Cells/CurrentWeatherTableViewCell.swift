@@ -11,25 +11,13 @@ class CurrentWeatherTableViewCell: UITableViewCell {
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var weatherDescriptionLabel: UILabel!
     @IBOutlet weak var weatherIconView: UIImageView!
-    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var observationTimeLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    func setCurrentWeather(_ weather: CurrentWeather) {
+        guard let data = weather.data.first else { return }
+        weatherDescriptionLabel.text = data.weather.description
+        tempLabel.text = data.temp.temperatureText
+        weatherIconView.load(src: data.weather.iconURL)
+        observationTimeLabel.text = "Today at \(data.ob_time?.timeText ?? "")"
     }
-    
-    func setForecast(_ forecast: DailyForecast) {
-        guard let weatherData = forecast.data.first else { return }
-        cityLabel.text = forecast.city_name
-        weatherDescriptionLabel.text = weatherData.weather.description
-        tempLabel.text = weatherData.temp.temperatureText
-        weatherIconView.load(src: weatherData.weather.iconURL)
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

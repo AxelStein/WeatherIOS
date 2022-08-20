@@ -8,6 +8,7 @@
 import Foundation
 
 struct Location {
+    var title: String
     var lat: Double
     var lon: Double
 }

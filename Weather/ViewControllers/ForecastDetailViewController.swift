@@ -13,11 +13,13 @@ class ForecastDetailViewController: UITableViewController {
     var forecastData: ForecastData!
     
     override func viewDidLoad() {
+        navigationItem.title = forecastData.valid_date?.dateText
+        
         items = [ForecastDetailItem]()
         items.append(.temperature(value: forecastData.temp))
         items.append(.wind(speed: forecastData.wind_spd, direction: forecastData.wind_cdir))
-        if forecastData.pop > 0 {
-            items.append(.precipitationProbability(value: forecastData.pop))
+        if forecastData.pop ?? 0 > 0 {
+            items.append(.precipitationProbability(value: forecastData.pop ?? 0))
         }
         if forecastData.precip > 1 {
             items.append(.precipitation(value: forecastData.precip))
@@ -28,7 +30,9 @@ class ForecastDetailViewController: UITableViewController {
             items.append(.snow(value: forecastData.snow))
         }
         items.append(.visibility(value: forecastData.vis))
-        items.append(.ultravioletIndex(value: forecastData.uv))
+        if forecastData.uv > 0 {
+            items.append(.ultravioletIndex(value: forecastData.uv))
+        }
         items.append(.pressure(value: forecastData.pres))
         items.append(.sunrise(value: forecastData.sunriseDate))
         items.append(.sunset(value: forecastData.sunsetDate))
@@ -36,10 +40,6 @@ class ForecastDetailViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return forecastData.valid_date?.dateText
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
