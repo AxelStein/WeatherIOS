@@ -29,7 +29,7 @@ class DailyForecastViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Current weather"
+            return ""
         }
         let count = dailyForecast != nil ? dailyForecast!.data.count : 0
         return "\(count)-day forecast"
