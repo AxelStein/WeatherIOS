@@ -7,18 +7,7 @@
 
 import Foundation
 
-let key = "5a62cec1882c4e55b2a6ce59cfa31ffd"
-
-func createUrlComponents(path: String) -> URLComponents {
-    var components = URLComponents()
-    components.scheme = "https"
-    components.host = "api.weatherbit.io"
-    components.path = path
-    return components
-}
-
-// https://www.weatherbit.io/static/img/icons/t01d.png
-class GetForecastInteractor {
+class GetDailyForecastInteractor {
     private let dataLoader = DataLoader()
     
     func invoke(location: Location, handler: @escaping (DailyForecast?) -> Void) {
@@ -30,6 +19,7 @@ class GetForecastInteractor {
                 }
             } catch let error {
                 print(error)
+                handler(nil)
             }
         }
     }

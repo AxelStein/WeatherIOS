@@ -25,8 +25,13 @@ struct DailyForecast: Codable {
     let data: [ForecastData]
 }
 
+struct HourlyForecast: Codable {
+    let data: [ForecastData]
+}
+
 struct ForecastData: Codable {
-    let valid_date: String
+    let valid_date: String?
+    let timestamp_utc: String?
     let temp: Float
     let min_temp: Float
     let max_temp: Float

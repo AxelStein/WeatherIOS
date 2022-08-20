@@ -7,6 +7,8 @@
 
 import Foundation
 
+let key = "5a62cec1882c4e55b2a6ce59cfa31ffd"
+
 struct Endpoint {
     let path: String
     let queryItems: [URLQueryItem]
@@ -20,6 +22,19 @@ extension Endpoint {
                 URLQueryItem(name: "lang", value: "ru"),
                 URLQueryItem(name: "key", value: key),
                 URLQueryItem(name: "days", value: "7"),
+                URLQueryItem(name: "lat", value: String(location.lat)),
+                URLQueryItem(name: "lon", value: String(location.lon)),
+            ]
+        )
+    }
+    
+    static func getHourlyForecast(location: Location) -> Endpoint {
+        return Endpoint(
+            path: "/v2.0/forecast/hourly",
+            queryItems: [
+                URLQueryItem(name: "lang", value: "ru"),
+                URLQueryItem(name: "key", value: key),
+                URLQueryItem(name: "hours", value: "24"),
                 URLQueryItem(name: "lat", value: String(location.lat)),
                 URLQueryItem(name: "lon", value: String(location.lon)),
             ]
