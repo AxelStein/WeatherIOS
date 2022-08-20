@@ -11,6 +11,7 @@ class DailyForecastViewController: UITableViewController {
     private let getDailyForecast = GetDailyForecastInteractor()
     private let locationLutsk = Location(lat: 50.7482711757513, lon: 25.329339998846542)
     private var dailyForecast: DailyForecast?
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         fetchDailyForecast(at: locationLutsk)
@@ -60,7 +61,9 @@ class DailyForecastViewController: UITableViewController {
 extension DailyForecastViewController {
     
     func fetchDailyForecast(at location: Location) {
+        self.activityIndicator.startAnimating()
         getDailyForecast.invoke(location: location) { dailyForecast in
+            self.activityIndicator.stopAnimating()
             self.dailyForecast = dailyForecast
             self.tableView.reloadData()
         }
