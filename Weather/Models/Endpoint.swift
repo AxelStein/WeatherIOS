@@ -21,7 +21,7 @@ extension Endpoint {
             queryItems: [
                 // URLQueryItem(name: "lang", value: "ru"),
                 URLQueryItem(name: "key", value: key),
-                URLQueryItem(name: "days", value: "14"),
+                URLQueryItem(name: "days", value: "10"),
                 URLQueryItem(name: "lat", value: String(location.lat)),
                 URLQueryItem(name: "lon", value: String(location.lon)),
             ]

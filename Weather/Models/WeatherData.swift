@@ -43,10 +43,14 @@ struct ForecastData: Codable {
     let sunset_ts: Int64
     let weather: WeatherDetail
     let pop: Int // Probability of Precipitation (%)
+    let precip: Float // Accumulated liquid equivalent precipitation (default mm)
     let snow: Int // Accumulated snowfall (default mm)
     let snow_depth: Int // Snow Depth (default mm)
     let rh: Int // Average relative humidity (%)
     let clouds: Int // Average total cloud coverage (%)
+    let vis: Float // Visibility (km)
+    let uv: Float // Maximum UV Index (0-11+)
+    let pres: Float // Average pressure (mb)
 }
 
 extension ForecastData {
@@ -62,12 +66,16 @@ extension ForecastData {
 enum ForecastDetailItem {
     case temperature(value: Float)
     case wind(speed: Float, direction: String)
-    case precipitation(value: Int)
+    case precipitationProbability(value: Int)
+    case precipitation(value: Float)
     case humidity(value: Int)
     case clouds(value: Int)
     case snow(value: Int)
     case sunrise(value: Date)
     case sunset(value: Date)
+    case visibility(value: Float)
+    case ultravioletIndex(value: Float)
+    case pressure(value: Float)
 }
 
 extension ForecastDetailItem {
@@ -77,6 +85,8 @@ extension ForecastDetailItem {
             return UIImage(systemName: "thermometer")!
         case .wind:
             return UIImage(systemName: "wind")!
+        case .precipitationProbability:
+            return UIImage(systemName: "cloud.rain")!
         case .precipitation:
             return UIImage(systemName: "cloud.rain")!
         case .humidity:
@@ -89,6 +99,12 @@ extension ForecastDetailItem {
             return UIImage(systemName: "sunrise")!
         case .sunset:
             return UIImage(systemName: "sunset")!
+        case .visibility:
+            return UIImage(systemName: "eye")!
+        case .ultravioletIndex:
+            return UIImage(systemName: "light.max")!
+        case .pressure:
+            return UIImage(systemName: "barometer")!
         }
     }
     
@@ -98,6 +114,8 @@ extension ForecastDetailItem {
             return "Average temperature"
         case .wind:
             return "Wind"
+        case .precipitationProbability:
+            return "Probability of precipitations"
         case .precipitation:
             return "Precipitations"
         case .humidity:
@@ -110,6 +128,12 @@ extension ForecastDetailItem {
             return "Sunrise"
         case .sunset:
             return "Sunset"
+        case .visibility:
+            return "Visibility"
+        case .ultravioletIndex:
+            return "Ultraviolet index"
+        case .pressure:
+            return "Pressure"
         }
     }
     
@@ -119,8 +143,10 @@ extension ForecastDetailItem {
             return "\(value)°"
         case .wind(let speed, let direction):
             return "\(speed) m/s \(direction)"
-        case .precipitation(let value):
+        case .precipitationProbability(let value):
             return "\(value)%"
+        case .precipitation(let value):
+            return "\(Int(value)) mm"
         case .humidity(let value):
             return "\(value)%"
         case .clouds(let value):
@@ -131,6 +157,12 @@ extension ForecastDetailItem {
             return value.timeText
         case .sunset(let value):
             return value.timeText
+        case .visibility(let value):
+            return "\(Int(value)) km"
+        case .ultravioletIndex(let value):
+            return "\(value)"
+        case .pressure(let value):
+            return "\(value) mb"
         }
     }
 }
