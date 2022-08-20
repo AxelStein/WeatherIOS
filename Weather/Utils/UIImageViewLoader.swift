@@ -16,10 +16,7 @@ extension UIImageView {
     func load(src: String) {
         guard let url = URL(string: src) else { return }
         
-        var request = URLRequest(url: url)
-        request.cachePolicy = .returnCacheDataElseLoad
-        
-        let task = URLSession.shared.dataTask(with: request) { data, res, err in
+        let task = URLSession.shared.dataTask(with: url) { data, res, err in
             guard let data = data, err == nil else {
                 return
             }

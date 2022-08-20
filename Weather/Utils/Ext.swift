@@ -36,6 +36,10 @@ extension Date {
         }
         return formatter.string(from: self)
     }
+    
+    var dateTimeText: String {
+        return "\(dateText) at \(timeText)"
+    }
 }
 
 extension String {
@@ -44,6 +48,13 @@ extension String {
         formatter.dateFormat = "yyyy-MM-dd"
         let date = formatter.date(from: self)
         return date?.weekdayText ?? ""
+    }
+    
+    var dateTimeText: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let date = formatter.date(from: self)
+        return date?.dateTimeText ?? ""
     }
     
     var dateText: String {

@@ -18,6 +18,6 @@ class CurrentWeatherTableViewCell: UITableViewCell {
         weatherDescriptionLabel.text = data.weather.description
         tempLabel.text = data.temp.temperatureText
         weatherIconView.load(src: data.weather.iconURL)
-        observationTimeLabel.text = "Today at \(data.ob_time?.timeText ?? "")"
+        observationTimeLabel.text = "\(data.ob_time?.dateTimeText ?? "")"
     }
 }
