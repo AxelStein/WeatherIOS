@@ -19,9 +19,9 @@ extension Endpoint {
         return Endpoint(
             path: "/v2.0/forecast/daily",
             queryItems: [
-                URLQueryItem(name: "lang", value: "ru"),
+                // URLQueryItem(name: "lang", value: "ru"),
                 URLQueryItem(name: "key", value: key),
-                URLQueryItem(name: "days", value: "7"),
+                URLQueryItem(name: "days", value: "14"),
                 URLQueryItem(name: "lat", value: String(location.lat)),
                 URLQueryItem(name: "lon", value: String(location.lon)),
             ]
@@ -32,7 +32,7 @@ extension Endpoint {
         return Endpoint(
             path: "/v2.0/forecast/hourly",
             queryItems: [
-                URLQueryItem(name: "lang", value: "ru"),
+                // URLQueryItem(name: "lang", value: "ru"),
                 URLQueryItem(name: "key", value: key),
                 URLQueryItem(name: "hours", value: "24"),
                 URLQueryItem(name: "lat", value: String(location.lat)),

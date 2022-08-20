@@ -35,19 +35,24 @@ class DailyForecastViewController: UITableViewController {
         return "\(count)-day forecast"
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showForecastDetail" {
+            let vc = segue.destination as! ForecastDetailViewController
+            guard let index = tableView.indexPathForSelectedRow else { return }
+            vc.forecastData = dailyForecast?.data[index.row]
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CurrentWeatherTableViewCell", for: indexPath) as! CurrentWeatherTableViewCell
-            if let dailyForecast = dailyForecast {
-                cell.setForecast(dailyForecast)
-            }
+            cell.setForecast(dailyForecast!)
             return cell
         }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "DayForecastTableViewCell", for: indexPath) as! DayForecastTableViewCell
-        if let dailyForecast = dailyForecast {
-            let forecast = dailyForecast.data[indexPath.row]
-            cell.setForecast(forecast)
-        }
+        let forecast = dailyForecast!.data[indexPath.row]
+        cell.setForecast(forecast)
         return cell
     }
 }
