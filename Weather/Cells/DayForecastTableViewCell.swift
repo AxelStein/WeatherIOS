@@ -19,15 +19,9 @@ class DayForecastTableViewCell: UITableViewCell {
     }
     
     func setForecast(_ data: ForecastData) {
-        if let validDate = data.valid_date {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            let date = formatter.date(from: validDate)
-            weekDayLabel.text = date?.weekdayText
-        }
-        
-        maxTempLabel.text = "\(data.max_temp)°"
-        minTempLabel.text = "\(data.min_temp)°"
+        weekDayLabel.text = data.valid_date?.weekdayText
+        maxTempLabel.text = data.max_temp.temperatureText
+        minTempLabel.text = data.min_temp.temperatureText
         weatherIconView.load(src: data.weather.iconURL)
     }
 

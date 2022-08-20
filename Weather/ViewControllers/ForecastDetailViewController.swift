@@ -26,13 +26,14 @@ class ForecastDetailViewController: UITableViewController {
         }
         items.append(.sunrise(value: forecastData.sunriseDate))
         items.append(.sunset(value: forecastData.sunsetDate))
-        
-        print(forecastData.sunriseDate)
-        print(forecastData.sunsetDate)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return forecastData.valid_date?.dateText
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -40,6 +41,11 @@ class ForecastDetailViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ForecastSummaryItemCell", for: indexPath) as! ForecastSummaryItemCell
+            cell.setForecastData(forecastData)
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "ForecastDetailItemCell", for: indexPath) as! ForecastDetailItemCell
         cell.setItem(items[indexPath.row])
         return cell

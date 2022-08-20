@@ -22,7 +22,7 @@ class CurrentWeatherTableViewCell: UITableViewCell {
         guard let weatherData = forecast.data.first else { return }
         cityLabel.text = forecast.city_name
         weatherDescriptionLabel.text = weatherData.weather.description
-        tempLabel.text = "\(weatherData.temp)°"
+        tempLabel.text = weatherData.temp.temperatureText
         weatherIconView.load(src: weatherData.weather.iconURL)
     }
 
