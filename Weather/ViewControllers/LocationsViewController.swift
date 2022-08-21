@@ -11,7 +11,7 @@ protocol LocationsDelegate {
     func setCurrentLocation(_ location: Location)
 }
 
-class LocationsViewController: UITableViewController {
+class LocationsViewController: UITableViewController, MapViewDelegate {
     private let getLocations = GetLocationsInteractor()
     private var locations: [Location]? = nil
     var delegate: LocationsDelegate? = nil
@@ -35,10 +35,22 @@ class LocationsViewController: UITableViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMap" {
+            let vc = segue.destination as! MapViewController
+            vc.delegate = self
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let location = locations![indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationItemCell", for: indexPath) as! LocationItemCell
         cell.titleLabel.text = location.title
         return cell
+    }
+    
+    func addLocation(_ location: Location) {
+        locations = getLocations.invoke()
+        tableView.reloadData()
     }
 }

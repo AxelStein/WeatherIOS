@@ -78,6 +78,7 @@ class DailyForecastViewController: UITableViewController, LocationsDelegate {
     }
     
     func setCurrentLocation(_ location: Location) {
+        navigationItem.title = location.title
         fetchCurrentWeather(at: location)
     }
 }
@@ -108,7 +109,6 @@ extension DailyForecastViewController {
             self.loadingAlert?.dismiss(animated: true)
             
             self.dailyForecast = dailyForecast
-            self.navigationItem.title = dailyForecast?.cityName
             self.tableView.reloadData()
         }
     }

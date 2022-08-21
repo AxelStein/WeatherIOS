@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -205,12 +206,52 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Locations" id="cEr-Vu-6Ym">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="iRM-wG-xDh"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="iRM-wG-xDh">
+                            <connections>
+                                <segue destination="tR0-NP-pwi" kind="show" identifier="showMap" id="F4S-8a-1k3"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cqE-Jm-25v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1298.5507246376812" y="874.55357142857144"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="Cde-Ei-0nN">
+            <objects>
+                <viewController id="tR0-NP-pwi" customClass="MapViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lMj-nj-nuH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="voV-cv-WUw">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6KT-9d-CU4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="voV-cv-WUw" firstAttribute="top" secondItem="6KT-9d-CU4" secondAttribute="top" id="29N-XU-hdI"/>
+                            <constraint firstItem="voV-cv-WUw" firstAttribute="leading" secondItem="6KT-9d-CU4" secondAttribute="leading" id="CtT-ST-nPk"/>
+                            <constraint firstItem="6KT-9d-CU4" firstAttribute="bottom" secondItem="voV-cv-WUw" secondAttribute="bottom" id="QOK-H6-mqs"/>
+                            <constraint firstItem="6KT-9d-CU4" firstAttribute="trailing" secondItem="voV-cv-WUw" secondAttribute="trailing" id="W1Y-oy-m58"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="brY-gM-efj">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="MMT-Rp-vEA">
+                            <connections>
+                                <action selector="addLocation:" destination="tR0-NP-pwi" id="req-2K-NBy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="voV-cv-WUw" id="GVM-dd-MzJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x4L-I9-wdh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2100" y="874.55357142857144"/>
         </scene>
         <!--Forecast Detail View Controller-->
         <scene sceneID="bnW-Jn-9C9">
