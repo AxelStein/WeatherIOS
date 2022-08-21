@@ -12,19 +12,24 @@ class GetDailyForecastInteractor {
     
     func invoke(location: Location, handler: @escaping (DailyForecast?) -> Void) {
         dataLoader.request(endpoint: .getDailyForecast(location: location)) { result in
+            var forecast: DailyForecast? = nil
             do {
-                let forecast = try self.parseDailyForecast(result.get())
-                DispatchQueue.main.async {
-                    handler(forecast)
-                }
+                forecast = try self.parseDailyForecast(result.get())
             } catch let error {
                 print(error)
-                handler(nil)
+            }
+            DispatchQueue.main.async {
+                handler(forecast)
             }
         }
     }
     
     private func parseDailyForecast(_ data: Data) -> DailyForecast? {
-        return try! JSONDecoder().decode(DailyForecast.self, from: data)
+        do {
+            return try JSONDecoder().decode(DailyForecast.self, from: data)
+        } catch let error {
+            print(error)
+        }
+        return nil
     }
 }

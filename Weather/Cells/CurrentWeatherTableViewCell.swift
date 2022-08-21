@@ -12,6 +12,7 @@ class CurrentWeatherTableViewCell: UITableViewCell {
     @IBOutlet weak var weatherDescriptionLabel: UILabel!
     @IBOutlet weak var weatherIconView: UIImageView!
     @IBOutlet weak var observationTimeLabel: UILabel!
+    @IBOutlet weak var aqiButton: UIButton!
     
     func setCurrentWeather(_ weather: CurrentWeather) {
         guard let data = weather.data.first else { return }
@@ -19,5 +20,8 @@ class CurrentWeatherTableViewCell: UITableViewCell {
         tempLabel.text = data.temp.temperatureText
         weatherIconView.load(src: data.weather.iconURL)
         observationTimeLabel.text = "\(data.ob_time?.dateTimeText ?? "")"
+        if let aqi = data.aqi {
+            aqiButton.setTitle("AQI \(aqi)", for: .normal)
+        }
     }
 }

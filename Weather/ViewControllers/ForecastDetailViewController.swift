@@ -21,7 +21,7 @@ class ForecastDetailViewController: UITableViewController {
         if forecastData.pop ?? 0 > 0 {
             items.append(.precipitationProbability(value: forecastData.pop ?? 0))
         }
-        if forecastData.precip > 1 {
+        if forecastData?.precip ?? 0 > 1 {
             items.append(.precipitation(value: forecastData.precip))
         }
         items.append(.clouds(value: forecastData.clouds))

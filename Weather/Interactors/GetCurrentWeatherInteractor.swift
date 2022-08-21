@@ -12,18 +12,24 @@ class GetCurrentWeatherInteractor {
     
     func invoke(location: Location, handler: @escaping (CurrentWeather?) -> Void) {
         dataLoader.request(endpoint: .getCurrentWeather(location: location), handler: { result in
+            var weather: CurrentWeather? = nil
             do {
-                let weather = try self.parseData(result.get())
-                DispatchQueue.main.async {
-                    handler(weather)
-                }
+                weather = try self.parseData(result.get())
             } catch let error {
                 print(error)
+            }
+            DispatchQueue.main.async {
+                handler(weather)
             }
         })
     }
     
-    private func parseData(_ data: Data) -> CurrentWeather {
-        return try! JSONDecoder().decode(CurrentWeather.self, from: data)
+    private func parseData(_ data: Data) -> CurrentWeather? {
+        do {
+            return try JSONDecoder().decode(CurrentWeather.self, from: data)
+        } catch let error {
+            print(error)
+        }
+        return nil
     }
 }
