@@ -29,10 +29,10 @@ class LocationsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.popViewController(animated: true)
         if let location = locations?[indexPath.row] {
             delegate?.setCurrentLocation(location)
         }
-        navigationController?.popViewController(animated: true)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

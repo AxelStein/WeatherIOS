@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension Locale {
     static var is24Hour: Bool {
@@ -75,5 +76,39 @@ extension String {
 extension Float {
     var temperatureText: String {
         return "\(self)°"
+    }
+}
+
+extension UIViewController {
+    func showActivityIndicator() {
+        let activity = UIActivityIndicatorView(style: .medium)
+        activity.center = self.view.center
+        self.view.addSubview(activity)
+        activity.startAnimating()
+    }
+    
+    func hideActivityIndicator() {
+        self.view.subviews.forEach {
+            if $0 is UIActivityIndicatorView {
+                $0.removeFromSuperview()
+            }
+        }
+    }
+    
+    func showActivityIndicatorAlert() -> UIAlertController {
+        let alert = UIAlertController(title: "Loading...", message: nil, preferredStyle: .alert)
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.isUserInteractionEnabled = false
+        activityIndicator.startAnimating()
+                
+        alert.view.addSubview(activityIndicator)
+        alert.view.heightAnchor.constraint(equalToConstant: 95).isActive = true
+                
+        activityIndicator.centerXAnchor.constraint(equalTo: alert.view.centerXAnchor, constant: 0).isActive = true
+        activityIndicator.bottomAnchor.constraint(equalTo: alert.view.bottomAnchor, constant: -20).isActive = true
+                
+        present(alert, animated: true)
+        return alert
     }
 }

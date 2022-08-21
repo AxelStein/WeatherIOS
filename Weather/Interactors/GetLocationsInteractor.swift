@@ -24,6 +24,9 @@ class GetLocationsInteractor {
             locations.append(
                 Location(title: "Trondheim", lat: 63.42444727686416, lon: 10.425296929932376)
             )
+            locations.append(
+                Location(title: "Ushu", lat: -54.817851, lon: -68.337654)
+            )
         }
     }
     

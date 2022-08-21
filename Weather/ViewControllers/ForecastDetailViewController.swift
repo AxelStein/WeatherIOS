@@ -13,21 +13,23 @@ class ForecastDetailViewController: UITableViewController {
     var forecastData: ForecastData!
     
     override func viewDidLoad() {
-        navigationItem.title = forecastData.valid_date?.dateText
+        navigationItem.title = forecastData.validDate?.dateText
         
         items = [ForecastDetailItem]()
         items.append(.temperature(value: forecastData.temp))
-        items.append(.wind(speed: forecastData.wind_spd, direction: forecastData.wind_cdir))
+        items.append(.wind(speed: forecastData.windSpd, direction: forecastData.windCdir))
         if forecastData.pop ?? 0 > 0 {
             items.append(.precipitationProbability(value: forecastData.pop ?? 0))
         }
-        if forecastData?.precip ?? 0 > 1 {
-            items.append(.precipitation(value: forecastData.precip))
+        if forecastData.precip ?? 0 > 1 {
+            items.append(.precipitation(value: forecastData.precip ?? 0))
         }
         items.append(.clouds(value: forecastData.clouds))
-        items.append(.humidity(value: forecastData.rh))
-        if forecastData.snow > 0 {
-            items.append(.snow(value: forecastData.snow))
+        if forecastData.rh ?? 0 > 0 {
+            items.append(.humidity(value: forecastData.rh ?? 0))
+        }
+        if forecastData.snow ?? 0 > 0 {
+            items.append(.snow(value: forecastData.snow ?? 0))
         }
         items.append(.visibility(value: forecastData.vis))
         if forecastData.uv > 0 {

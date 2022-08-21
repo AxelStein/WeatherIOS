@@ -26,43 +26,42 @@ extension WeatherDetail {
 }
 
 struct DailyForecast: Codable {
-    let city_name: String
-    let country_code: String
+    let cityName: String
+    let countryCode: String
     let data: [ForecastData]
 }
 
 struct ForecastData: Codable {
-    let valid_date: String?
-    let timestamp_utc: String?
+    let validDate: String?
+    let timestampUtc: String?
     let temp: Float
-    let min_temp: Float?
-    let max_temp: Float?
-    let wind_spd: Float // Wind speed (Default m/s)
-    let wind_cdir: String // Wind direction
-    let wind_cdir_full: String // Verbal wind direction
-    let sunrise_ts: Int64?
-    let sunset_ts: Int64?
+    let minTemp: Float?
+    let maxTemp: Float?
+    let windSpd: Float // Wind speed (Default m/s)
+    let windCdir: String // Wind direction
+    let windCdirFull: String // Verbal wind direction
+    let sunriseTs: Int64?
+    let sunsetTs: Int64?
     let weather: WeatherDetail
     let pop: Int? // Probability of Precipitation (%)
-    let precip: Float // Accumulated liquid equivalent precipitation (default mm)
-    let snow: Int // Accumulated snowfall (default mm)
-    let snow_depth: Int? // Snow Depth (default mm)
-    let rh: Int // Average relative humidity (%)
+    let precip: Float? // Accumulated liquid equivalent precipitation (default mm)
+    let snow: Float? // Accumulated snowfall (default mm)
+    let rh: Float? // Average relative humidity (%)
     let clouds: Int // Average total cloud coverage (%)
     let vis: Float // Visibility (km)
     let uv: Float // Maximum UV Index (0-11+)
     let pres: Float // Average pressure (mb)
     let aqi: Int? // Air Quality Index [US - EPA standard 0 - +500]
-    let ob_time: String? // Last observation time (YYYY-MM-DD HH:MM).
+    let obTime: String? // Last observation time (YYYY-MM-DD HH:MM).
 }
 
 extension ForecastData {
     var sunriseDate: Date {
-        return Date(timeIntervalSince1970: TimeInterval(self.sunrise_ts!))
+        return Date(timeIntervalSince1970: TimeInterval(self.sunriseTs!))
     }
     
     var sunsetDate: Date {
-        return Date(timeIntervalSince1970: TimeInterval(self.sunset_ts!))
+        return Date(timeIntervalSince1970: TimeInterval(self.sunsetTs!))
     }
 }
 
@@ -71,9 +70,9 @@ enum ForecastDetailItem {
     case wind(speed: Float, direction: String)
     case precipitationProbability(value: Int)
     case precipitation(value: Float)
-    case humidity(value: Int)
+    case humidity(value: Float)
     case clouds(value: Int)
-    case snow(value: Int)
+    case snow(value: Float)
     case sunrise(value: Date)
     case sunset(value: Date)
     case visibility(value: Float)

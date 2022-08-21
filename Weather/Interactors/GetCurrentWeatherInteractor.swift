@@ -26,7 +26,9 @@ class GetCurrentWeatherInteractor {
     
     private func parseData(_ data: Data) -> CurrentWeather? {
         do {
-            return try JSONDecoder().decode(CurrentWeather.self, from: data)
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            return try decoder.decode(CurrentWeather.self, from: data)
         } catch let error {
             print(error)
         }

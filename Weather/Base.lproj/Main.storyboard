@@ -16,13 +16,9 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="eXU-Ig-Fes">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" id="YvF-yX-x0a">
-                            <rect key="frame" x="0.0" y="293" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrentWeatherTableViewCell" id="hlX-LV-vl3" customClass="CurrentWeatherTableViewCell" customModule="Weather" customModuleProvider="target">
-                                <rect key="frame" x="20" y="49.5" width="374" height="173"/>
+                                <rect key="frame" x="20" y="32" width="374" height="173"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hlX-LV-vl3" id="XCt-9i-SPZ">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="173"/>
@@ -88,7 +84,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="DayForecastTableViewCell" id="vFV-w8-06z" customClass="DayForecastTableViewCell" customModule="Weather" customModuleProvider="target">
-                                <rect key="frame" x="20" y="222.5" width="374" height="52.5"/>
+                                <rect key="frame" x="20" y="205" width="374" height="52.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vFV-w8-06z" id="82G-v7-5x3">
                                     <rect key="frame" x="0.0" y="0.0" width="345.5" height="52.5"/>
@@ -155,9 +151,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="activityIndicator" destination="YvF-yX-x0a" id="OFK-Nj-eHx"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GlN-ME-Q51" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -229,7 +222,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ForecastDetailItemCell" id="cLL-6s-oLH" customClass="ForecastDetailItemCell" customModule="Weather" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49.5" width="414" height="48.5"/>
+                                <rect key="frame" x="0.0" y="32" width="414" height="48.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cLL-6s-oLH" id="XD1-Mz-qR6">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="48.5"/>
@@ -273,7 +266,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ForecastSummaryItemCell" id="viv-B7-sAl" customClass="ForecastSummaryItemCell" customModule="Weather" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98" width="414" height="152.5"/>
+                                <rect key="frame" x="0.0" y="80.5" width="414" height="152.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="viv-B7-sAl" id="hn1-Te-DEr">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="152.5"/>
@@ -378,11 +371,14 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2ip-py-cZK" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XI0-Mq-cXE">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="XI0-Mq-cXE">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="knf-IN-dJR">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="8Ri-8x-gCO" kind="relationship" relationship="rootViewController" id="Azd-SU-WLL"/>
                     </connections>

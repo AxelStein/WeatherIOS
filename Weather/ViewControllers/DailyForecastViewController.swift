@@ -12,9 +12,9 @@ class DailyForecastViewController: UITableViewController, LocationsDelegate {
     private let getCurrentWeather = GetCurrentWeatherInteractor()
     private let getDailyForecast = GetDailyForecastInteractor()
     
+    private var loadingAlert: UIAlertController? = nil
     private var currentWeather: CurrentWeather?
     private var dailyForecast: DailyForecast?
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         if let location = getLocations.invoke().first {
@@ -78,9 +78,7 @@ class DailyForecastViewController: UITableViewController, LocationsDelegate {
     }
     
     func setCurrentLocation(_ location: Location) {
-        navigationItem.title = location.title
         fetchCurrentWeather(at: location)
-        fetchDailyForecast(at: location)
     }
 }
 
@@ -97,17 +95,20 @@ extension UITableViewCell {
 extension DailyForecastViewController {
     
     func fetchCurrentWeather(at location: Location) {
+        self.loadingAlert = showActivityIndicatorAlert()
+        
         getCurrentWeather.invoke(location: location) { weather in
             self.currentWeather = weather
-            self.tableView.reloadData()
+            self.fetchDailyForecast(at: location)
         }
     }
     
     func fetchDailyForecast(at location: Location) {
-        self.activityIndicator.startAnimating()
         getDailyForecast.invoke(location: location) { dailyForecast in
-            self.activityIndicator.stopAnimating()
+            self.loadingAlert?.dismiss(animated: true)
+            
             self.dailyForecast = dailyForecast
+            self.navigationItem.title = dailyForecast?.cityName
             self.tableView.reloadData()
         }
     }

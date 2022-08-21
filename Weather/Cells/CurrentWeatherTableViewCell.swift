@@ -19,7 +19,7 @@ class CurrentWeatherTableViewCell: UITableViewCell {
         weatherDescriptionLabel.text = data.weather.description
         tempLabel.text = data.temp.temperatureText
         weatherIconView.load(src: data.weather.iconURL)
-        observationTimeLabel.text = "\(data.ob_time?.dateTimeText ?? "")"
+        observationTimeLabel.text = "\(data.obTime?.dateTimeText ?? "")"
         if let aqi = data.aqi {
             aqiButton.setTitle("AQI \(aqi)", for: .normal)
         }
