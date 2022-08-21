@@ -25,13 +25,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.addGestureRecognizer(tapGestureRecognizer)
         
         getLocations.invoke().forEach {
-            addAnnotation(at: $0)
+            self.addAnnotation(at: $0)
         }
     }
     
     @IBAction func addLocation(_ sender: UIBarButtonItem) {
+        showAddLocationAlert()
+    }
+    
+    private func showAddLocationAlert() {
         guard let point = pointAnnotation else { return }
-            
+
         let alert = UIAlertController(title: "Enter title", message: nil, preferredStyle: .alert)
         alert.addTextField()
         if let textField = alert.textFields?.first {
@@ -41,19 +45,31 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             if let textField = alert.textFields?.first {
                 if let title = textField.text, !title.isEmpty {
-                    let location = Location(
-                        title: title,
-                        lat: point.coordinate.latitude,
-                        lon: point.coordinate.longitude
-                    )
-                    self.addLocation.invoke(location: location)
-                    self.delegate?.addLocation(location)
-                    self.navigationController?.popViewController(animated: true)
+                    self.addLocationImplAndClose(with: title, point: point)
                 }
             }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)
+    }
+    
+    private func addLocationImplAndClose(with title: String, point: MKPointAnnotation) {
+        let location = Location(
+            title: title,
+            lat: point.coordinate.latitude,
+            lon: point.coordinate.longitude
+        )
+        self.addLocation.invoke(location: location) { result in
+            switch result {
+            case .success:
+                do {
+                    self.delegate?.addLocation(location)
+                    self.navigationController?.popViewController(animated: true)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     @objc func clickOnMap(_ sender: UITapGestureRecognizer) {

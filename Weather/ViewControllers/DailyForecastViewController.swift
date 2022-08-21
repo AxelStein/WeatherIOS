@@ -18,7 +18,7 @@ class DailyForecastViewController: UITableViewController, LocationsDelegate {
     
     override func viewDidLoad() {
         if let location = getLocations.invoke().first {
-            setCurrentLocation(location)
+            self.setCurrentLocation(location)
         }
     }
     

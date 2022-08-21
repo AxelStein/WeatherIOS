@@ -13,11 +13,17 @@ protocol LocationsDelegate {
 
 class LocationsViewController: UITableViewController, MapViewDelegate {
     private let getLocations = GetLocationsInteractor()
+    
     private var locations: [Location]? = nil
     var delegate: LocationsDelegate? = nil
     
     override func viewDidLoad() {
+        reloadLocations()
+    }
+    
+    private func reloadLocations() {
         locations = getLocations.invoke()
+        tableView.reloadData()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -50,7 +56,6 @@ class LocationsViewController: UITableViewController, MapViewDelegate {
     }
     
     func addLocation(_ location: Location) {
-        locations = getLocations.invoke()
-        tableView.reloadData()
+        reloadLocations()
     }
 }

@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import RealmSwift
 
 class GetLocationsInteractor {
-    private let dataSource = LocationDataSource()
     
     func invoke() -> [Location] {
-        return dataSource.getLocations()
+        let realm = try! Realm()
+        return realm.objects(Location.self).map { $0 }
     }
 }

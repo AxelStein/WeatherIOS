@@ -6,11 +6,20 @@
 //
 
 import Foundation
+import RealmSwift
 
 class AddLocationInteractor {
-    private let dataSource = LocationDataSource()
     
-    func invoke(location: Location) {
-        dataSource.add(location)
+    func invoke(location: Location, handler: @escaping (Result<Void, Error>) -> Void) {
+        let realm = try! Realm()
+        realm.writeAsync {
+            realm.add(location)
+        } onComplete: { error in
+            if let error = error {
+                handler(.failure(error))
+            } else {
+                handler(.success(()))
+            }
+        }
     }
 }

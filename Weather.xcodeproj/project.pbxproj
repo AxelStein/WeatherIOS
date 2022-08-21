@@ -19,7 +19,9 @@
 		FA8DD88128B23C73003D72BB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8DD88028B23C73003D72BB /* MapKit.framework */; };
 		FA8DD88328B23D1E003D72BB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DD88228B23D1E003D72BB /* MapViewController.swift */; };
 		FA8DD88528B245EE003D72BB /* AddLocationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DD88428B245EE003D72BB /* AddLocationInteractor.swift */; };
-		FA8DD88728B2460F003D72BB /* LocationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DD88628B2460F003D72BB /* LocationDataSource.swift */; };
+		FA8DD88728B2460F003D72BB /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DD88628B2460F003D72BB /* Realm.swift */; };
+		FA8DD88A28B28FBB003D72BB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FA8DD88928B28FBB003D72BB /* Realm */; };
+		FA8DD88C28B28FBB003D72BB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA8DD88B28B28FBB003D72BB /* RealmSwift */; };
 		FAA4463128B0AC6D001E8D2B /* DayForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4462F28B0AC6D001E8D2B /* DayForecastTableViewCell.swift */; };
 		FAA4463628B0AEA8001E8D2B /* CurrentWeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4463428B0AEA8001E8D2B /* CurrentWeatherTableViewCell.swift */; };
 		FAA4463A28B0B0D2001E8D2B /* DailyForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4463928B0B0D2001E8D2B /* DailyForecastViewController.swift */; };
@@ -48,7 +50,7 @@
 		FA8DD88028B23C73003D72BB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		FA8DD88228B23D1E003D72BB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FA8DD88428B245EE003D72BB /* AddLocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationInteractor.swift; sourceTree = "<group>"; };
-		FA8DD88628B2460F003D72BB /* LocationDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataSource.swift; sourceTree = "<group>"; };
+		FA8DD88628B2460F003D72BB /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		FAA4462F28B0AC6D001E8D2B /* DayForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayForecastTableViewCell.swift; sourceTree = "<group>"; };
 		FAA4463428B0AEA8001E8D2B /* CurrentWeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherTableViewCell.swift; sourceTree = "<group>"; };
 		FAA4463928B0B0D2001E8D2B /* DailyForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA8DD88C28B28FBB003D72BB /* RealmSwift in Frameworks */,
+				FA8DD88A28B28FBB003D72BB /* Realm in Frameworks */,
 				FA8DD88128B23C73003D72BB /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,7 +100,7 @@
 				FA35F12928AD804700632205 /* Endpoint.swift */,
 				FA83BFFE28AAD9F500D4B023 /* WeatherData.swift */,
 				FA83C00028AADA1E00D4B023 /* Location.swift */,
-				FA8DD88628B2460F003D72BB /* LocationDataSource.swift */,
+				FA8DD88628B2460F003D72BB /* Realm.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -194,6 +198,10 @@
 			dependencies = (
 			);
 			name = Weather;
+			packageProductDependencies = (
+				FA8DD88928B28FBB003D72BB /* Realm */,
+				FA8DD88B28B28FBB003D72BB /* RealmSwift */,
+			);
 			productName = Weather;
 			productReference = FABABCC528A995EC009BB4CD /* Weather.app */;
 			productType = "com.apple.product-type.application";
@@ -223,6 +231,9 @@
 				ru,
 			);
 			mainGroup = FABABCBC28A995EC009BB4CD;
+			packageReferences = (
+				FA8DD88828B28FBB003D72BB /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = FABABCC628A995EC009BB4CD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -259,7 +270,7 @@
 				FAA4463128B0AC6D001E8D2B /* DayForecastTableViewCell.swift in Sources */,
 				FA83BFFF28AAD9F500D4B023 /* WeatherData.swift in Sources */,
 				FAF7B32628AC1F2E00B89951 /* GetDailyForecastInteractor.swift in Sources */,
-				FA8DD88728B2460F003D72BB /* LocationDataSource.swift in Sources */,
+				FA8DD88728B2460F003D72BB /* Realm.swift in Sources */,
 				FAB3A90028B102F9005ACF02 /* ForecastSummaryItemCell.swift in Sources */,
 				FAA4463A28B0B0D2001E8D2B /* DailyForecastViewController.swift in Sources */,
 				FA8DD88528B245EE003D72BB /* AddLocationInteractor.swift in Sources */,
@@ -493,6 +504,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FA8DD88828B28FBB003D72BB /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FA8DD88928B28FBB003D72BB /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA8DD88828B28FBB003D72BB /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		FA8DD88B28B28FBB003D72BB /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA8DD88828B28FBB003D72BB /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FABABCBD28A995EC009BB4CD /* Project object */;
 }
