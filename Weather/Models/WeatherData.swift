@@ -33,10 +33,10 @@ struct DailyForecast: Codable {
 
 struct ForecastData: Codable {
     let validDate: String?
-    let timestampUtc: String?
     let temp: Float
     let minTemp: Float?
     let maxTemp: Float?
+    let appTemp: Float? // Apparent/"Feels Like" temperature (default Celsius).
     let windSpd: Float // Wind speed (Default m/s)
     let windCdir: String // Wind direction
     let windCdirFull: String // Verbal wind direction

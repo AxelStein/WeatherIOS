@@ -17,19 +17,19 @@ class ForecastDetailViewController: UITableViewController {
         
         items = [ForecastDetailItem]()
         items.append(.temperature(value: forecastData.temp))
-        items.append(.wind(speed: forecastData.windSpd, direction: forecastData.windCdir))
         if forecastData.pop ?? 0 > 0 {
             items.append(.precipitationProbability(value: forecastData.pop ?? 0))
         }
         if forecastData.precip ?? 0 > 1 {
             items.append(.precipitation(value: forecastData.precip ?? 0))
         }
+        if forecastData.snow ?? 0 > 0 {
+            items.append(.snow(value: forecastData.snow ?? 0))
+        }
+        items.append(.wind(speed: forecastData.windSpd, direction: forecastData.windCdir))
         items.append(.clouds(value: forecastData.clouds))
         if forecastData.rh ?? 0 > 0 {
             items.append(.humidity(value: forecastData.rh ?? 0))
-        }
-        if forecastData.snow ?? 0 > 0 {
-            items.append(.snow(value: forecastData.snow ?? 0))
         }
         items.append(.visibility(value: forecastData.vis))
         if forecastData.uv > 0 {
