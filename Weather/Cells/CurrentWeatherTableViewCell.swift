@@ -22,6 +22,29 @@ class CurrentWeatherTableViewCell: UITableViewCell {
         observationTimeLabel.text = "\(data.obTime?.dateTimeText ?? "")"
         if let aqi = data.aqi {
             aqiButton.setTitle("AQI \(aqi)", for: .normal)
+            switch aqi {
+            case 0...50:
+                aqiButton.setTint(UIColor.systemGreen)
+            case 51...100:
+                aqiButton.setTint(UIColor.systemYellow)
+            case 101...150:
+                aqiButton.setTint(UIColor.systemOrange)
+            case 151...200:
+                aqiButton.setTint(UIColor.systemRed)
+            case 201...300:
+                aqiButton.setTint(UIColor.systemPurple)
+            default:
+                aqiButton.setTint(UIColor.systemIndigo)
+            }
         }
+    }
+}
+
+private extension UIButton {
+    func setTint(_ color: UIColor) {
+        tintColor = color
+        layer.borderColor = color.cgColor
+        layer.borderWidth = 1
+        layer.cornerRadius = 8
     }
 }
