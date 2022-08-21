@@ -19,23 +19,22 @@ class CurrentWeatherTableViewCell: UITableViewCell {
         weatherDescriptionLabel.text = data.weather.description
         tempLabel.text = data.temp.temperatureText
         weatherIconView.load(src: data.weather.iconURL)
-        observationTimeLabel.text = "\(data.obTime?.dateTimeText ?? "")"
-        if let aqi = data.aqi {
-            aqiButton.setTitle("AQI \(aqi)", for: .normal)
-            switch aqi {
-            case 0...50:
-                aqiButton.setTint(UIColor.systemGreen)
-            case 51...100:
-                aqiButton.setTint(UIColor.systemYellow)
-            case 101...150:
-                aqiButton.setTint(UIColor.systemOrange)
-            case 151...200:
-                aqiButton.setTint(UIColor.systemRed)
-            case 201...300:
-                aqiButton.setTint(UIColor.systemPurple)
-            default:
-                aqiButton.setTint(UIColor.systemIndigo)
-            }
+        observationTimeLabel.text = "\(data.lastObservationDateTime.dateTimeText )"
+        let aqi = data.airQualityIndex
+        aqiButton.setTitle("AQI \(aqi)", for: .normal)
+        switch aqi {
+        case 0...50:
+            aqiButton.setTint(UIColor.systemGreen)
+        case 51...100:
+            aqiButton.setTint(UIColor.systemYellow)
+        case 101...150:
+            aqiButton.setTint(UIColor.systemOrange)
+        case 151...200:
+            aqiButton.setTint(UIColor.systemRed)
+        case 201...300:
+            aqiButton.setTint(UIColor.systemPurple)
+        default:
+            aqiButton.setTint(UIColor.systemIndigo)
         }
     }
 }

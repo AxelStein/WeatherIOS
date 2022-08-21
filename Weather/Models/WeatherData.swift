@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 struct CurrentWeather: Codable {
     let count: Int
@@ -32,36 +33,90 @@ struct DailyForecast: Codable {
 }
 
 struct ForecastData: Codable {
-    let validDate: String?
+    let date: Date
     let temp: Float
-    let minTemp: Float?
-    let maxTemp: Float?
-    let appTemp: Float? // Apparent/"Feels Like" temperature (default Celsius).
-    let windSpd: Float // Wind speed (Default m/s)
-    let windCdir: String // Wind direction
-    let windCdirFull: String // Verbal wind direction
-    let sunriseTs: Int64?
-    let sunsetTs: Int64?
+    let minTemp: Float
+    let maxTemp: Float
+    let feelsLikeTemp: Float
+    let windSpeed: Float // m/s
+    let windDirection: String
+    let windDirectionFull: String
+    let sunrise: Date
+    let sunset: Date
     let weather: WeatherDetail
-    let pop: Int? // Probability of Precipitation (%)
-    let precip: Float? // Accumulated liquid equivalent precipitation (default mm)
-    let snow: Float? // Accumulated snowfall (default mm)
-    let rh: Float? // Average relative humidity (%)
-    let clouds: Int // Average total cloud coverage (%)
-    let vis: Float // Visibility (km)
-    let uv: Float // Maximum UV Index (0-11+)
-    let pres: Float // Average pressure (mb)
-    let aqi: Int? // Air Quality Index [US - EPA standard 0 - +500]
-    let obTime: String? // Last observation time (YYYY-MM-DD HH:MM).
+    let precipitationProbability: Int // %
+    let precipitation: Float // Accumulated liquid equivalent precipitation (default mm)
+    let accumulatedSnowfall: Float // default mm/h
+    let averageRelativeHumidity: Float // %
+    let averageCloudCoverage: Int // %
+    let visibility: Float // km
+    let ultraVioletIndex: Float
+    let averagePressure: Float // mb
+    let airQualityIndex: Int
+    let lastObservationDateTime: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case date = "validDate"
+        case temp
+        case minTemp
+        case maxTemp
+        case feelsLikeTemp = "appTemp"
+        case windSpeed = "windSpd"
+        case windDirection = "windCdir"
+        case windDirectionFull = "windCdirFull"
+        case sunrise = "sunriseTs"
+        case sunset = "sunsetTs"
+        case weather
+        case precipitationProbability = "pop"
+        case precipitation = "precip"
+        case accumulatedSnowfall = "snow"
+        case averageRelativeHumidity = "rh"
+        case averageCloudCoverage = "clouds"
+        case visibility = "vis"
+        case ultraVioletIndex = "uv"
+        case averagePressure = "pres"
+        case airQualityIndex = "aqi"
+        case lastObservationDateTime = "obTime"
+    }
 }
 
 extension ForecastData {
-    var sunriseDate: Date {
-        return Date(timeIntervalSince1970: TimeInterval(self.sunriseTs!))
-    }
-    
-    var sunsetDate: Date {
-        return Date(timeIntervalSince1970: TimeInterval(self.sunsetTs!))
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let dateStr = try values.decodeIfPresent(String.self, forKey: .date) ?? ""
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        date = formatter.date(from: dateStr) ?? Date()
+        
+        let obDt = try values.decodeIfPresent(String.self, forKey: .lastObservationDateTime) ?? ""
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        lastObservationDateTime = formatter.date(from: obDt) ?? Date()
+        
+        let sunriseTs = try values.decodeIfPresent(Int64.self, forKey: .sunrise) ?? 0
+        sunrise = Date(timeIntervalSince1970: TimeInterval(sunriseTs))
+        
+        let sunsetTs = try values.decodeIfPresent(Int64.self, forKey: .sunset) ?? 0
+        sunset = Date(timeIntervalSince1970: TimeInterval(sunsetTs))
+        
+        temp = try values.decodeIfPresent(Float.self, forKey: .temp) ?? 0
+        minTemp = try values.decodeIfPresent(Float.self, forKey: .minTemp) ?? 0
+        maxTemp = try values.decodeIfPresent(Float.self, forKey: .maxTemp) ?? 0
+        feelsLikeTemp = try values.decodeIfPresent(Float.self, forKey: .feelsLikeTemp) ?? 0
+        windSpeed = try values.decodeIfPresent(Float.self, forKey: .windSpeed) ?? 0
+        windDirection = try values.decodeIfPresent(String.self, forKey: .windDirection) ?? ""
+        windDirectionFull = try values.decodeIfPresent(String.self, forKey: .windDirectionFull) ?? ""
+        
+        weather = try values.decodeIfPresent(WeatherDetail.self, forKey: .weather) ?? WeatherDetail(icon: "", code: 0, description: "")
+        precipitationProbability = try values.decodeIfPresent(Int.self, forKey: .precipitationProbability) ?? 0
+        precipitation = try values.decodeIfPresent(Float.self, forKey: .precipitation) ?? 0
+        accumulatedSnowfall = try values.decodeIfPresent(Float.self, forKey: .accumulatedSnowfall) ?? 0
+        averageRelativeHumidity = try values.decodeIfPresent(Float.self, forKey: .averageRelativeHumidity) ?? 0
+        averageCloudCoverage = try values.decodeIfPresent(Int.self, forKey: .averageCloudCoverage) ?? 0
+        visibility = try values.decodeIfPresent(Float.self, forKey: .visibility) ?? 0
+        ultraVioletIndex = try values.decodeIfPresent(Float.self, forKey: .ultraVioletIndex) ?? 0
+        averagePressure = try values.decodeIfPresent(Float.self, forKey: .averagePressure) ?? 0
+        airQualityIndex = try values.decodeIfPresent(Int.self, forKey: .airQualityIndex) ?? 0
     }
 }
 
@@ -154,7 +209,7 @@ extension ForecastDetailItem {
         case .clouds(let value):
             return "\(value)%"
         case .snow(let value):
-            return "\(value) mm"
+            return "\(value) mm/h"
         case .sunrise(let value):
             return value.timeText
         case .sunset(let value):

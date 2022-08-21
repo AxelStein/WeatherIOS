@@ -13,31 +13,31 @@ class ForecastDetailViewController: UITableViewController {
     var forecastData: ForecastData!
     
     override func viewDidLoad() {
-        navigationItem.title = forecastData.validDate?.dateText
+        navigationItem.title = forecastData.date.dateText
         
         items = [ForecastDetailItem]()
         items.append(.temperature(value: forecastData.temp))
-        if forecastData.pop ?? 0 > 0 {
-            items.append(.precipitationProbability(value: forecastData.pop ?? 0))
+        if forecastData.precipitationProbability > 0 {
+            items.append(.precipitationProbability(value: forecastData.precipitationProbability))
         }
-        if forecastData.precip ?? 0 > 1 {
-            items.append(.precipitation(value: forecastData.precip ?? 0))
+        if forecastData.precipitation > 1 {
+            items.append(.precipitation(value: forecastData.precipitation))
         }
-        if forecastData.snow ?? 0 > 0 {
-            items.append(.snow(value: forecastData.snow ?? 0))
+        if forecastData.accumulatedSnowfall > 0 {
+            items.append(.snow(value: forecastData.accumulatedSnowfall))
         }
-        items.append(.wind(speed: forecastData.windSpd, direction: forecastData.windCdir))
-        items.append(.clouds(value: forecastData.clouds))
-        if forecastData.rh ?? 0 > 0 {
-            items.append(.humidity(value: forecastData.rh ?? 0))
+        items.append(.wind(speed: forecastData.windSpeed, direction: forecastData.windDirectionFull))
+        items.append(.clouds(value: forecastData.averageCloudCoverage))
+        if forecastData.averageRelativeHumidity > 0 {
+            items.append(.humidity(value: forecastData.averageRelativeHumidity))
         }
-        items.append(.visibility(value: forecastData.vis))
-        if forecastData.uv > 0 {
-            items.append(.ultravioletIndex(value: forecastData.uv))
+        items.append(.visibility(value: forecastData.visibility))
+        if forecastData.ultraVioletIndex > 0 {
+            items.append(.ultravioletIndex(value: forecastData.ultraVioletIndex))
         }
-        items.append(.pressure(value: forecastData.pres))
-        items.append(.sunrise(value: forecastData.sunriseDate))
-        items.append(.sunset(value: forecastData.sunsetDate))
+        items.append(.pressure(value: forecastData.averagePressure))
+        items.append(.sunrise(value: forecastData.sunrise))
+        items.append(.sunset(value: forecastData.sunset))
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

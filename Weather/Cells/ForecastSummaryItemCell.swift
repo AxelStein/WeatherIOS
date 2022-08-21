@@ -18,7 +18,7 @@ class ForecastSummaryItemCell: UITableViewCell {
         tempLabel.text = data.temp.temperatureText
         iconView.load(src: data.weather.iconURL)
         descriptionLabel.text = data.weather.description
-        minTempLabel.text = data.minTemp?.temperatureText
-        maxTempLabel.text = data.maxTemp?.temperatureText
+        minTempLabel.text = data.minTemp.temperatureText
+        maxTempLabel.text = data.maxTemp.temperatureText
     }
 }
