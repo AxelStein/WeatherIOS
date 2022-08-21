@@ -140,7 +140,7 @@
                     <navigationItem key="navigationItem" title="Weather" id="No7-MS-J2l">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="location" catalog="system" id="0H5-bh-xgY">
                             <connections>
-                                <segue destination="rhy-XN-c88" kind="show" id="CZ7-CV-yEj"/>
+                                <segue destination="rhy-XN-c88" kind="show" identifier="showLocations" id="CZ7-CV-yEj"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DailyForecastViewController: UITableViewController {
+class DailyForecastViewController: UITableViewController, LocationsDelegate {
     private let getLocations = GetLocationsInteractor()
     private let getCurrentWeather = GetCurrentWeatherInteractor()
     private let getDailyForecast = GetDailyForecastInteractor()
@@ -18,9 +18,7 @@ class DailyForecastViewController: UITableViewController {
     
     override func viewDidLoad() {
         if let location = getLocations.invoke().first {
-            navigationItem.title = location.title
-            fetchCurrentWeather(at: location)
-            fetchDailyForecast(at: location)
+            setCurrentLocation(location)
         }
     }
     
@@ -56,6 +54,10 @@ class DailyForecastViewController: UITableViewController {
             guard let index = tableView.indexPathForSelectedRow else { return }
             vc.forecastData = dailyForecast?.data[index.row]
         }
+        if segue.identifier == "showLocations" {
+            let vc = segue.destination as! LocationsViewController
+            vc.delegate = self
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -73,6 +75,12 @@ class DailyForecastViewController: UITableViewController {
         cell.setForecast(forecast)
         cell.showSeparator()
         return cell
+    }
+    
+    func setCurrentLocation(_ location: Location) {
+        navigationItem.title = location.title
+        fetchCurrentWeather(at: location)
+        fetchDailyForecast(at: location)
     }
 }
 

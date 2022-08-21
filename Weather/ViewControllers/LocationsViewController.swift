@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol LocationsDelegate {
+    func setCurrentLocation(_ location: Location)
+}
+
 class LocationsViewController: UITableViewController {
     private let getLocations = GetLocationsInteractor()
     private var locations: [Location]? = nil
+    var delegate: LocationsDelegate? = nil
     
     override func viewDidLoad() {
         locations = getLocations.invoke()
@@ -21,6 +26,13 @@ class LocationsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return locations?.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let location = locations?[indexPath.row] {
+            delegate?.setCurrentLocation(location)
+        }
+        navigationController?.popViewController(animated: true)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
