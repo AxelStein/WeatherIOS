@@ -15,7 +15,7 @@ class DataLoader {
             if let data = data {
                 handler(.success(data))
             } else {
-                handler(.failure(.network))
+                handler(.failure(.network(error: err)))
             }
         }
         task.resume()
@@ -24,5 +24,5 @@ class DataLoader {
 
 enum DataLoaderError: Error {
     case invalidURL
-    case network
+    case network(error: Error?)
 }

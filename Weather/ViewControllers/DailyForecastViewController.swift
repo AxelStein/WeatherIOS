@@ -15,10 +15,23 @@ class DailyForecastViewController: UITableViewController, LocationsDelegate {
     private var loadingAlert: UIAlertController? = nil
     private var currentWeather: CurrentWeather?
     private var dailyForecast: DailyForecast?
+    private var errorView: ErrorMessageView? = nil
+    private var currentLocation: Location? = nil
     
     override func viewDidLoad() {
         if let location = getLocations.invoke().first {
             self.setCurrentLocation(location)
+        }
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc func refreshData(refreshControl: UIRefreshControl) {
+        if let currentLocation = currentLocation {
+            fetchCurrentWeather(at: currentLocation, showAlert: false)
+        } else {
+            refreshControl.endRefreshing()
         }
     }
     
@@ -78,6 +91,7 @@ class DailyForecastViewController: UITableViewController, LocationsDelegate {
     }
     
     func setCurrentLocation(_ location: Location) {
+        currentLocation = location
         navigationItem.title = location.title
         fetchCurrentWeather(at: location)
     }
@@ -95,8 +109,10 @@ extension UITableViewCell {
 
 extension DailyForecastViewController {
     
-    func fetchCurrentWeather(at location: Location) {
-        self.loadingAlert = showActivityIndicatorAlert()
+    func fetchCurrentWeather(at location: Location, showAlert: Bool = true) {
+        if showAlert {
+            self.loadingAlert = showActivityIndicatorAlert()
+        }
         
         getCurrentWeather.invoke(location: location) { weather in
             self.currentWeather = weather
@@ -105,11 +121,44 @@ extension DailyForecastViewController {
     }
     
     func fetchDailyForecast(at location: Location) {
-        getDailyForecast.invoke(location: location) { dailyForecast in
+        getDailyForecast.invoke(location: location) { result in
             self.loadingAlert?.dismiss(animated: true)
+            self.tableView.refreshControl?.endRefreshing()
             
-            self.dailyForecast = dailyForecast
+            switch result {
+            case .success(let forecast):
+                self.dailyForecast = forecast
+                
+            case .failure(let error):
+                self.dailyForecast = nil
+                if let dataLoaderError = error as? DataLoaderError {
+                    switch dataLoaderError {
+                    case .invalidURL:
+                        self.showErrorMessage("Invalid URL")
+                    case .network(let e):
+                        self.showErrorMessage(e?.localizedDescription ?? "Network error")
+                    }
+                } else if let apiError = error as? ApiError {
+                    self.showErrorMessage(apiError.statusMessage)
+                } else {
+                    self.showErrorMessage(error.localizedDescription)
+                }
+            }
             self.tableView.reloadData()
+        }
+    }
+    
+    func showErrorMessage(_ message: String) {
+        if errorView == nil {
+            let guide = view.safeAreaLayoutGuide
+            let width = guide.layoutFrame.size.width
+            let height = guide.layoutFrame.size.height
+            
+            errorView = ErrorMessageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+            self.view.addSubview(errorView!)
+        }
+        if let errorView = self.errorView {
+            errorView.messageLabel.text = message
         }
     }
 }

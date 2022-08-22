@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 import RealmSwift
 
+struct ApiError: Error, Codable {
+    let statusCode: Int
+    let statusMessage: String
+}
+
 struct CurrentWeather: Codable {
     let count: Int
     let data: [ForecastData]

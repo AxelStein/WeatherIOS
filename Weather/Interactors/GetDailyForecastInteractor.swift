@@ -10,16 +10,27 @@ import Foundation
 class GetDailyForecastInteractor {
     private let dataLoader = DataLoader()
     
-    func invoke(location: Location, handler: @escaping (DailyForecast?) -> Void) {
+    func invoke(location: Location, handler: @escaping (Result<DailyForecast, Error>) -> Void) {
         dataLoader.request(endpoint: .getDailyForecast(location: location)) { result in
-            var forecast: DailyForecast? = nil
-            do {
-                forecast = try self.parseDailyForecast(result.get())
-            } catch let error {
-                print(error)
-            }
-            DispatchQueue.main.async {
-                handler(forecast)
+            switch result {
+            case .success(let data):
+                if let forecast = self.parseDailyForecast(data) {
+                    DispatchQueue.main.async {
+                        handler(.success(forecast))
+                    }
+                } else if let apiError = self.parseApiError(data) {
+                    DispatchQueue.main.async {
+                        handler(.failure(apiError))
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        handler(.failure(ApiError(statusCode: 0, statusMessage: "Unknown error")))
+                    }
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    handler(.failure(error))
+                }
             }
         }
     }
@@ -29,9 +40,16 @@ class GetDailyForecastInteractor {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             return try decoder.decode(DailyForecast.self, from: data)
-        } catch let error {
-            print(error)
-        }
+        } catch {}
+        return nil
+    }
+    
+    private func parseApiError(_ data: Data) -> ApiError? {
+        do {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            return try decoder.decode(ApiError.self, from: data)
+        } catch {}
         return nil
     }
 }

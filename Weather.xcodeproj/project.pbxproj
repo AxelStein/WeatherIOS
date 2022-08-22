@@ -21,6 +21,8 @@
 		FA8DD88528B245EE003D72BB /* AddLocationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DD88428B245EE003D72BB /* AddLocationInteractor.swift */; };
 		FA8DD88A28B28FBB003D72BB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FA8DD88928B28FBB003D72BB /* Realm */; };
 		FA8DD88C28B28FBB003D72BB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA8DD88B28B28FBB003D72BB /* RealmSwift */; };
+		FA8DD88E28B2EAEB003D72BB /* ErrorMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8DD88D28B2EAEB003D72BB /* ErrorMessageView.xib */; };
+		FA8DD89028B2ED29003D72BB /* ErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DD88F28B2ED29003D72BB /* ErrorMessageView.swift */; };
 		FAA4463128B0AC6D001E8D2B /* DayForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4462F28B0AC6D001E8D2B /* DayForecastTableViewCell.swift */; };
 		FAA4463628B0AEA8001E8D2B /* CurrentWeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4463428B0AEA8001E8D2B /* CurrentWeatherTableViewCell.swift */; };
 		FAA4463A28B0B0D2001E8D2B /* DailyForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4463928B0B0D2001E8D2B /* DailyForecastViewController.swift */; };
@@ -49,6 +51,8 @@
 		FA8DD88028B23C73003D72BB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		FA8DD88228B23D1E003D72BB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FA8DD88428B245EE003D72BB /* AddLocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationInteractor.swift; sourceTree = "<group>"; };
+		FA8DD88D28B2EAEB003D72BB /* ErrorMessageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorMessageView.xib; sourceTree = "<group>"; };
+		FA8DD88F28B2ED29003D72BB /* ErrorMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageView.swift; sourceTree = "<group>"; };
 		FAA4462F28B0AC6D001E8D2B /* DayForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayForecastTableViewCell.swift; sourceTree = "<group>"; };
 		FAA4463428B0AEA8001E8D2B /* CurrentWeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherTableViewCell.swift; sourceTree = "<group>"; };
 		FAA4463928B0B0D2001E8D2B /* DailyForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastViewController.swift; sourceTree = "<group>"; };
@@ -113,11 +117,13 @@
 		FAA4462828B02063001E8D2B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				FA8DD88D28B2EAEB003D72BB /* ErrorMessageView.xib */,
 				FAA4463428B0AEA8001E8D2B /* CurrentWeatherTableViewCell.swift */,
 				FAA4462F28B0AC6D001E8D2B /* DayForecastTableViewCell.swift */,
 				FAA4464028B0D909001E8D2B /* ForecastDetailItemCell.swift */,
 				FAB3A8FF28B102F9005ACF02 /* ForecastSummaryItemCell.swift */,
 				FA567B4F28B170240033B58D /* LocationItemCell.swift */,
+				FA8DD88F28B2ED29003D72BB /* ErrorMessageView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -248,6 +254,7 @@
 				FABABCD528A995ED009BB4CD /* LaunchScreen.storyboard in Resources */,
 				FABABCD228A995ED009BB4CD /* Assets.xcassets in Resources */,
 				FABABCD028A995EC009BB4CD /* Main.storyboard in Resources */,
+				FA8DD88E28B2EAEB003D72BB /* ErrorMessageView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +278,7 @@
 				FAA4463A28B0B0D2001E8D2B /* DailyForecastViewController.swift in Sources */,
 				FA8DD88528B245EE003D72BB /* AddLocationInteractor.swift in Sources */,
 				FABABCCB28A995EC009BB4CD /* SceneDelegate.swift in Sources */,
+				FA8DD89028B2ED29003D72BB /* ErrorMessageView.swift in Sources */,
 				FA567B5028B170240033B58D /* LocationItemCell.swift in Sources */,
 				FAA4463F28B0CAE0001E8D2B /* ForecastDetailViewController.swift in Sources */,
 				FAA4464128B0D909001E8D2B /* ForecastDetailItemCell.swift in Sources */,
