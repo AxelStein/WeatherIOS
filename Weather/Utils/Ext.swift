@@ -16,10 +16,22 @@ extension Locale {
 }
 
 extension Date {
+    var weekdayAbbrText: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEE"
+        return formatter.string(from: self)
+    }
+    
     var weekdayText: String {
         let weekday = Calendar.current.component(.weekday, from: self)
         let formatter = DateFormatter()
         return formatter.weekdaySymbols[weekday - 1].capitalized
+    }
+    
+    var dateShortText: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM"
+        return formatter.string(from: self)
     }
     
     var dateText: String {

@@ -13,7 +13,7 @@ class DayForecastTableViewCell: UITableViewCell {
     @IBOutlet weak var weekDayLabel: UILabel!
     
     func setForecast(_ data: ForecastData) {
-        weekDayLabel.text = data.date.weekdayText
+        weekDayLabel.text = "\(data.date.weekdayAbbrText) • \(data.date.dateShortText)"
         tempLabel.text = "\(data.minTemp.temperatureText ) / \(data.maxTemp.temperatureText)"
         weatherIconView.load(src: data.weather.iconURL)
     }

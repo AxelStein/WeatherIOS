@@ -17,10 +17,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     private var pointAnnotation: MKPointAnnotation? = nil
     private let getLocations = GetLocationsInteractor()
     private let addLocation = AddLocationInteractor()
+    private var currentTitle = ""
     var delegate: MapViewDelegate? = nil
     
     override func viewDidLoad() {
         mapView.delegate = self
+        mapView.showsUserLocation = true
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickOnMap))
         mapView.addGestureRecognizer(tapGestureRecognizer)
         
@@ -41,6 +44,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if let textField = alert.textFields?.first {
             textField.font = UIFont(name: "System", size: 16)
             textField.autocapitalizationType = .sentences
+            textField.text = currentTitle
         }
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             if let textField = alert.textFields?.first {
@@ -76,6 +80,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if sender.state != UIGestureRecognizer.State.ended { return }
         let touchLocation = sender.location(in: mapView)
         let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
+        
+        let geocoder = CLGeocoder()
+        let location = CLLocation(latitude: locationCoordinate.latitude, longitude: locationCoordinate.longitude)
+        geocoder.reverseGeocodeLocation(location) { marks, error in
+            if let city = marks?.first?.locality,
+               let c = marks?.first?.isoCountryCode {
+                self.currentTitle = "\(city), \(c)"
+            }
+        }
         
         if pointAnnotation != nil {
             pointAnnotation!.coordinate = locationCoordinate
