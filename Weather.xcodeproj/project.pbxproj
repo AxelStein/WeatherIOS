@@ -29,6 +29,7 @@
 		FAA4463D28B0C44A001E8D2B /* Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4463C28B0C44A001E8D2B /* Ext.swift */; };
 		FAA4463F28B0CAE0001E8D2B /* ForecastDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4463E28B0CAE0001E8D2B /* ForecastDetailViewController.swift */; };
 		FAA4464128B0D909001E8D2B /* ForecastDetailItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA4464028B0D909001E8D2B /* ForecastDetailItemCell.swift */; };
+		FAB24B2B28B4354F00B4EBA4 /* RemoveLocationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB24B2A28B4354F00B4EBA4 /* RemoveLocationInteractor.swift */; };
 		FAB3A90028B102F9005ACF02 /* ForecastSummaryItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB3A8FF28B102F9005ACF02 /* ForecastSummaryItemCell.swift */; };
 		FABABCC928A995EC009BB4CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABABCC828A995EC009BB4CD /* AppDelegate.swift */; };
 		FABABCCB28A995EC009BB4CD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABABCCA28A995EC009BB4CD /* SceneDelegate.swift */; };
@@ -59,6 +60,7 @@
 		FAA4463C28B0C44A001E8D2B /* Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ext.swift; sourceTree = "<group>"; };
 		FAA4463E28B0CAE0001E8D2B /* ForecastDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDetailViewController.swift; sourceTree = "<group>"; };
 		FAA4464028B0D909001E8D2B /* ForecastDetailItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDetailItemCell.swift; sourceTree = "<group>"; };
+		FAB24B2A28B4354F00B4EBA4 /* RemoveLocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveLocationInteractor.swift; sourceTree = "<group>"; };
 		FAB3A8FF28B102F9005ACF02 /* ForecastSummaryItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastSummaryItemCell.swift; sourceTree = "<group>"; };
 		FABABCC528A995EC009BB4CD /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABABCC828A995EC009BB4CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				FA567B5328B172320033B58D /* GetLocationsInteractor.swift */,
 				FA567B5528B17D0F0033B58D /* GetCurrentWeatherInteractor.swift */,
 				FA8DD88428B245EE003D72BB /* AddLocationInteractor.swift */,
+				FAB24B2A28B4354F00B4EBA4 /* RemoveLocationInteractor.swift */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				FA83C00128AADA1E00D4B023 /* Location.swift in Sources */,
 				FA567B5628B17D0F0033B58D /* GetCurrentWeatherInteractor.swift in Sources */,
 				FA35F12A28AD804700632205 /* Endpoint.swift in Sources */,
+				FAB24B2B28B4354F00B4EBA4 /* RemoveLocationInteractor.swift in Sources */,
 				FA8DD88328B23D1E003D72BB /* MapViewController.swift in Sources */,
 				FA567B5228B171CA0033B58D /* LocationsViewController.swift in Sources */,
 				FABABCC928A995EC009BB4CD /* AppDelegate.swift in Sources */,

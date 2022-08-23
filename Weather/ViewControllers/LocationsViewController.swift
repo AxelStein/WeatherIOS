@@ -13,6 +13,7 @@ protocol LocationsDelegate {
 
 class LocationsViewController: UITableViewController, MapViewDelegate {
     private let getLocations = GetLocationsInteractor()
+    private let removeLocation = RemoveLocationInteractor()
     
     private var locations: [Location]? = nil
     var delegate: LocationsDelegate? = nil
@@ -24,6 +25,31 @@ class LocationsViewController: UITableViewController, MapViewDelegate {
     private func reloadLocations() {
         locations = getLocations.invoke()
         tableView.reloadData()
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .destructive, title: "Remove") { [weak self] (action, view, completion) in
+            self?.removeLocation(at: indexPath)
+            completion(true)
+        }
+        return UISwipeActionsConfiguration(actions: [action])
+    }
+    
+    private func removeLocation(at indexPath: IndexPath) {
+        if let locations = locations {
+            let location = locations[indexPath.row]
+            removeLocation.invoke(location: location) { result in
+                switch result {
+                case .success:
+                    self.locations?.remove(at: indexPath.row)
+                    self.tableView.beginUpdates()
+                    self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    self.tableView.endUpdates()
+                case .failure(let err):
+                    print("error \(err)")
+                }
+            }
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
