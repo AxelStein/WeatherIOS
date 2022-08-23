@@ -19,9 +19,9 @@ class CurrentWeatherTableViewCell: UITableViewCell {
         weatherDescriptionLabel.text = data.weather.description
         tempLabel.text = data.temp.temperatureText
         weatherIconView.load(src: data.weather.iconURL)
-        observationTimeLabel.text = "\(data.lastObservationDateTime.dateTimeText )"
+        observationTimeLabel.text = "\(data.lastObservationDateTime.dateTimeText)"
         let aqi = data.airQualityIndex
-        aqiButton.setTitle("AQI \(aqi)", for: .normal)
+        aqiButton.setTitle("\("aqi"~) \(aqi)", for: .normal)
         switch aqi {
         case 0...50:
             aqiButton.setTint(UIColor.systemGreen)

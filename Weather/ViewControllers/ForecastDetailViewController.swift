@@ -26,7 +26,7 @@ class ForecastDetailViewController: UITableViewController {
         if forecastData.accumulatedSnowfall > 0 {
             items.append(.snow(value: forecastData.accumulatedSnowfall))
         }
-        items.append(.wind(speed: forecastData.windSpeed, direction: forecastData.windDirectionFull))
+        items.append(.wind(speed: forecastData.windSpeed, direction: forecastData.windDirection))
         items.append(.clouds(value: forecastData.averageCloudCoverage))
         if forecastData.averageRelativeHumidity > 0 {
             items.append(.humidity(value: forecastData.averageRelativeHumidity))

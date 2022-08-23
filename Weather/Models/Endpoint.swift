@@ -19,6 +19,7 @@ extension Endpoint {
         return Endpoint(
             path: "/v2.0/forecast/daily",
             queryItems: [
+                URLQueryItem(name: "lang", value: Locale.current.languageCode ?? "en"),
                 URLQueryItem(name: "key", value: key),
                 URLQueryItem(name: "days", value: "10"),
                 URLQueryItem(name: "lat", value: String(location.lat)),
@@ -31,6 +32,7 @@ extension Endpoint {
         return Endpoint(
             path: "/v2.0/current",
             queryItems: [
+                URLQueryItem(name: "lang", value: Locale.current.languageCode ?? "en"),
                 URLQueryItem(name: "key", value: key),
                 URLQueryItem(name: "lat", value: String(location.lat)),
                 URLQueryItem(name: "lon", value: String(location.lon)),

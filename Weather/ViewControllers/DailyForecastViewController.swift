@@ -58,7 +58,7 @@ class DailyForecastViewController: UITableViewController, LocationsDelegate {
             return ""
         }
         let count = dailyForecast?.data.count ?? 0
-        return "\(count)-day forecast"
+        return "\(count)\("n_day_forecast"~)"
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

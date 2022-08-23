@@ -374,7 +374,9 @@
                                 <connections>
                                     <outlet property="descriptionLabel" destination="uPH-bM-Zkg" id="Qi8-Zk-tgU"/>
                                     <outlet property="iconView" destination="CCO-1J-xg7" id="SFA-dV-r5C"/>
+                                    <outlet property="maxLabel" destination="Hwu-B6-b3B" id="g8d-qO-Ceb"/>
                                     <outlet property="maxTempLabel" destination="lq3-NM-cv2" id="EyG-XC-sSf"/>
+                                    <outlet property="minLabel" destination="yZq-9w-t15" id="eS3-iO-8Me"/>
                                     <outlet property="minTempLabel" destination="aFS-bZ-Ruy" id="Wov-Fe-kCL"/>
                                     <outlet property="tempLabel" destination="lVy-ex-UDC" id="mti-GU-7Gl"/>
                                 </connections>

@@ -51,7 +51,7 @@ extension Date {
     }
     
     var dateTimeText: String {
-        return "\(dateText) at \(timeText)"
+        return "\(dateText) \("at"~) \(timeText)"
     }
 }
 
@@ -108,7 +108,7 @@ extension UIViewController {
     }
     
     func showActivityIndicatorAlert() -> UIAlertController {
-        let alert = UIAlertController(title: "Loading...", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "loading"~, message: nil, preferredStyle: .alert)
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.isUserInteractionEnabled = false
@@ -123,4 +123,9 @@ extension UIViewController {
         present(alert, animated: true)
         return alert
     }
+}
+
+postfix operator ~
+postfix func ~ (string: String) -> String {
+    return NSLocalizedString(string, comment: "")
 }

@@ -37,6 +37,8 @@
 		FABABCD228A995ED009BB4CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABABCD128A995ED009BB4CD /* Assets.xcassets */; };
 		FABABCD528A995ED009BB4CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FABABCD328A995ED009BB4CD /* LaunchScreen.storyboard */; };
 		FAF7B32628AC1F2E00B89951 /* GetDailyForecastInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7B32528AC1F2E00B89951 /* GetDailyForecastInteractor.swift */; };
+		FAFE881A28B5938E003ADCE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FAFE881C28B5938E003ADCE9 /* Localizable.strings */; };
+		FAFE881F28B599F4003ADCE9 /* ForecastDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFE881E28B599F4003ADCE9 /* ForecastDetailItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,9 @@
 		FABABCDC28A9961B009BB4CD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		FABABCDD28A9961B009BB4CD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		FAF7B32528AC1F2E00B89951 /* GetDailyForecastInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDailyForecastInteractor.swift; sourceTree = "<group>"; };
+		FAFE881B28B5938E003ADCE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FAFE881D28B593A2003ADCE9 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FAFE881E28B599F4003ADCE9 /* ForecastDetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDetailItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +109,7 @@
 				FA35F12928AD804700632205 /* Endpoint.swift */,
 				FA83BFFE28AAD9F500D4B023 /* WeatherData.swift */,
 				FA83C00028AADA1E00D4B023 /* Location.swift */,
+				FAFE881E28B599F4003ADCE9 /* ForecastDetailItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -172,6 +178,7 @@
 				FABABCD128A995ED009BB4CD /* Assets.xcassets */,
 				FABABCD328A995ED009BB4CD /* LaunchScreen.storyboard */,
 				FABABCD628A995ED009BB4CD /* Info.plist */,
+				FAFE881C28B5938E003ADCE9 /* Localizable.strings */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -254,6 +261,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAFE881A28B5938E003ADCE9 /* Localizable.strings in Resources */,
 				FABABCD528A995ED009BB4CD /* LaunchScreen.storyboard in Resources */,
 				FABABCD228A995ED009BB4CD /* Assets.xcassets in Resources */,
 				FABABCD028A995EC009BB4CD /* Main.storyboard in Resources */,
@@ -272,6 +280,7 @@
 				FA567B5628B17D0F0033B58D /* GetCurrentWeatherInteractor.swift in Sources */,
 				FA35F12A28AD804700632205 /* Endpoint.swift in Sources */,
 				FAB24B2B28B4354F00B4EBA4 /* RemoveLocationInteractor.swift in Sources */,
+				FAFE881F28B599F4003ADCE9 /* ForecastDetailItem.swift in Sources */,
 				FA8DD88328B23D1E003D72BB /* MapViewController.swift in Sources */,
 				FA567B5228B171CA0033B58D /* LocationsViewController.swift in Sources */,
 				FABABCC928A995EC009BB4CD /* AppDelegate.swift in Sources */,
@@ -313,6 +322,15 @@
 				FABABCDD28A9961B009BB4CD /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		FAFE881C28B5938E003ADCE9 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAFE881B28B5938E003ADCE9 /* en */,
+				FAFE881D28B593A2003ADCE9 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

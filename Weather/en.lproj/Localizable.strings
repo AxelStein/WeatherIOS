@@ -1,0 +1,34 @@
+/* 
+  Localizable.strings
+  Weather
+
+  Created by Александр Шерий on 24.08.2022.
+*/
+
+"wind" = "Wind";
+"precipitationProbability" = "Probability of precipitations";
+"precipitation" = "Precipitations";
+"humidity" = "Humidity";
+"clouds" = "Clouds";
+"snow" = "Snow";
+"sunrise" = "Sunrise";
+"sunset" = "Sunset";
+"visibility" = "Visibility";
+"ultravioletIndex" = "Ultraviolet index";
+"pressure" = "Pressure";
+"km" = "km";
+"m/s" = "m/s";
+"mb" = "mb";
+"mm" = "mm";
+"mm/h" = "mm/h";
+"min" = "min";
+"max" = "max";
+"loading" = "Loading...";
+"locations" = "Locations";
+"remove" = "Remove";
+"location_title" = "Location title";
+"cancel" = "Cancel";
+"ok" = "OK";
+"aqi" = "AQI";
+"at" = "at";
+"n_day_forecast" = "-day forecast";

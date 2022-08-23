@@ -39,21 +39,21 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     private func showAddLocationAlert() {
         guard let point = pointAnnotation else { return }
 
-        let alert = UIAlertController(title: "Enter title", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "location_title"~, message: nil, preferredStyle: .alert)
         alert.addTextField()
         if let textField = alert.textFields?.first {
             textField.font = UIFont(name: "System", size: 16)
             textField.autocapitalizationType = .sentences
             textField.text = currentTitle
         }
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        alert.addAction(UIAlertAction(title: "ok"~, style: .default, handler: { action in
             if let textField = alert.textFields?.first {
                 if let title = textField.text, !title.isEmpty {
                     self.addLocationImplAndClose(with: title, point: point)
                 }
             }
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "cancel"~, style: .cancel))
         present(alert, animated: true)
     }
     

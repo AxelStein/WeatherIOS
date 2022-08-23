@@ -1,0 +1,35 @@
+/* 
+  Localizable.strings
+  Weather
+
+  Created by Александр Шерий on 24.08.2022.
+  
+*/
+
+"wind" = "Ветер";
+"precipitationProbability" = "Вероятность осадков";
+"precipitation" = "Осадки";
+"humidity" = "Влажность";
+"clouds" = "Облачность";
+"snow" = "Снег";
+"sunrise" = "Восход";
+"sunset" = "Закат";
+"visibility" = "Видимость";
+"ultravioletIndex" = "УФ индекс";
+"pressure" = "Атм.давление";
+"km" = "км";
+"m/s" = "м/с";
+"mb" = "мб";
+"mm" = "мм";
+"mm/h" = "мм/ч";
+"min" = "мин";
+"max" = "макс";
+"loading" = "Загрузка...";
+"locations" = "Локации";
+"remove" = "Удалить";
+"location_title" = "Название локации";
+"cancel" = "Отмена";
+"ok" = "OK";
+"aqi" = "ИКВ";
+"at" = "в";
+"n_day_forecast" = "-дн прогноз";

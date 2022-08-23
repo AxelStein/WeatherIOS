@@ -20,6 +20,7 @@ class LocationsViewController: UITableViewController, MapViewDelegate {
     
     override func viewDidLoad() {
         reloadLocations()
+        navigationItem.title = "locations"~
     }
     
     private func reloadLocations() {
@@ -28,7 +29,7 @@ class LocationsViewController: UITableViewController, MapViewDelegate {
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let action = UIContextualAction(style: .destructive, title: "Remove") { [weak self] (action, view, completion) in
+        let action = UIContextualAction(style: .destructive, title: "remove"~) { [weak self] (action, view, completion) in
             self?.removeLocation(at: indexPath)
             completion(true)
         }
