@@ -14,18 +14,25 @@ protocol LocationsDelegate {
 class LocationsViewController: UITableViewController, MapViewDelegate {
     private let getLocations = GetLocationsInteractor()
     private let removeLocation = RemoveLocationInteractor()
-    
+
     private var locations: [LocationModel]? = nil
     var delegate: LocationsDelegate? = nil
     
     override func viewDidLoad() {
         reloadLocations()
+        navigationItem.rightBarButtonItems?.append(self.editButtonItem)
         navigationItem.title = "locations"~
     }
     
     private func reloadLocations() {
         locations = getLocations.invoke()
         tableView.reloadData()
+    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let from = sourceIndexPath.row
+        let to = destinationIndexPath.row
+        locations?.swapAt(from, to)
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
