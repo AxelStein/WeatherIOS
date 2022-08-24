@@ -6,20 +6,20 @@
 //
 
 import Foundation
-import RealmSwift
+import CoreData
+import UIKit
 
 class AddLocationInteractor {
     
-    func invoke(location: Location, handler: @escaping (Result<Void, Error>) -> Void) {
-        let realm = try! Realm()
-        realm.writeAsync {
-            realm.add(location)
-        } onComplete: { error in
-            if let error = error {
-                handler(.failure(error))
-            } else {
-                handler(.success(()))
-            }
-        }
+    func invoke(title: String, lat: Double, lon: Double) {
+        guard let app = UIApplication.shared.delegate as? AppDelegate else { fatalError() }
+        let viewContext = app.persistentContainer.viewContext
+        
+        let model = LocationModel(context: viewContext)
+        model.title = title
+        model.lat = lat
+        model.lon = lon
+        
+        app.saveChanges()
     }
 }

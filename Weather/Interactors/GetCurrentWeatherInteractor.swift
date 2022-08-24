@@ -10,7 +10,7 @@ import Foundation
 class GetCurrentWeatherInteractor {
     private let dataLoader = DataLoader()
     
-    func invoke(location: Location, handler: @escaping (CurrentWeather?) -> Void) {
+    func invoke(location: LocationModel, handler: @escaping (CurrentWeather?) -> Void) {
         dataLoader.request(endpoint: .getCurrentWeather(location: location), handler: { result in
             var weather: CurrentWeather? = nil
             do {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DailyForecastViewController: UITableViewController, LocationsDelegate {
     private let getLocations = GetLocationsInteractor()
@@ -16,10 +17,14 @@ class DailyForecastViewController: UITableViewController, LocationsDelegate {
     private var currentWeather: CurrentWeather?
     private var dailyForecast: DailyForecast?
     private var errorView: ErrorMessageView? = nil
-    private var currentLocation: Location? = nil
+    private var currentLocation: LocationModel? = nil
+    var container: NSPersistentContainer!
     
     override func viewDidLoad() {
-        if let location = getLocations.invoke().first {
+        guard let app = UIApplication.shared.delegate as? AppDelegate else { fatalError() }
+        container = app.persistentContainer
+        
+        if let location = getLocations.invoke()?.first {
             self.setCurrentLocation(location)
         }
         let refreshControl = UIRefreshControl()
@@ -90,7 +95,7 @@ class DailyForecastViewController: UITableViewController, LocationsDelegate {
         return cell
     }
     
-    func setCurrentLocation(_ location: Location) {
+    func setCurrentLocation(_ location: LocationModel) {
         currentLocation = location
         navigationItem.title = location.title
         fetchCurrentWeather(at: location)
@@ -109,7 +114,7 @@ extension UITableViewCell {
 
 extension DailyForecastViewController {
     
-    func fetchCurrentWeather(at location: Location, showAlert: Bool = true) {
+    func fetchCurrentWeather(at location: LocationModel, showAlert: Bool = true) {
         if showAlert {
             self.loadingAlert = showActivityIndicatorAlert()
         }
@@ -120,7 +125,7 @@ extension DailyForecastViewController {
         }
     }
     
-    func fetchDailyForecast(at location: Location) {
+    func fetchDailyForecast(at location: LocationModel) {
         getDailyForecast.invoke(location: location) { result in
             self.loadingAlert?.dismiss(animated: true)
             self.tableView.refreshControl?.endRefreshing()

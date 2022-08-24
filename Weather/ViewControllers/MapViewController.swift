@@ -7,9 +7,10 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 protocol MapViewDelegate {
-    func addLocation(_ location: Location)
+    func addLocation()
 }
 
 class MapViewController: UIViewController, MKMapViewDelegate {
@@ -27,7 +28,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(clickOnMap))
         mapView.addGestureRecognizer(tapGestureRecognizer)
         
-        getLocations.invoke().forEach {
+        getLocations.invoke()?.forEach {
             self.addAnnotation(at: $0)
         }
     }
@@ -58,22 +59,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     private func addLocationImplAndClose(with title: String, point: MKPointAnnotation) {
-        let location = Location(
-            title: title,
-            lat: point.coordinate.latitude,
-            lon: point.coordinate.longitude
-        )
-        self.addLocation.invoke(location: location) { result in
-            switch result {
-            case .success:
-                do {
-                    self.delegate?.addLocation(location)
-                    self.navigationController?.popViewController(animated: true)
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
+        self.addLocation.invoke(title: title, lat: point.coordinate.latitude, lon: point.coordinate.longitude)
+        self.delegate?.addLocation()
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func clickOnMap(_ sender: UITapGestureRecognizer) {
@@ -101,7 +89,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    private func addAnnotation(at location: Location) {
+    private func addAnnotation(at location: LocationModel) {
         let annotation = MKPointAnnotation()
         annotation.coordinate = CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon)
         mapView.addAnnotation(annotation)

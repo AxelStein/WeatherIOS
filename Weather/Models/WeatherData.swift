@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import RealmSwift
 
 struct ApiError: Error, Codable {
     let statusCode: Int

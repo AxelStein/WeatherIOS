@@ -8,14 +8,14 @@
 import UIKit
 
 protocol LocationsDelegate {
-    func setCurrentLocation(_ location: Location)
+    func setCurrentLocation(_ location: LocationModel)
 }
 
 class LocationsViewController: UITableViewController, MapViewDelegate {
     private let getLocations = GetLocationsInteractor()
     private let removeLocation = RemoveLocationInteractor()
     
-    private var locations: [Location]? = nil
+    private var locations: [LocationModel]? = nil
     var delegate: LocationsDelegate? = nil
     
     override func viewDidLoad() {
@@ -39,17 +39,12 @@ class LocationsViewController: UITableViewController, MapViewDelegate {
     private func removeLocation(at indexPath: IndexPath) {
         if let locations = locations {
             let location = locations[indexPath.row]
-            removeLocation.invoke(location: location) { result in
-                switch result {
-                case .success:
-                    self.locations?.remove(at: indexPath.row)
-                    self.tableView.beginUpdates()
-                    self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                    self.tableView.endUpdates()
-                case .failure(let err):
-                    print("error \(err)")
-                }
-            }
+            removeLocation.invoke(location: location)
+            
+            self.locations?.remove(at: indexPath.row)
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.endUpdates()
         }
     }
     
@@ -82,7 +77,7 @@ class LocationsViewController: UITableViewController, MapViewDelegate {
         return cell
     }
     
-    func addLocation(_ location: Location) {
+    func addLocation() {
         reloadLocations()
     }
 }

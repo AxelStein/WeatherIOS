@@ -6,19 +6,16 @@
 //
 
 import Foundation
-import RealmSwift
+import UIKit
+import CoreData
 
 class RemoveLocationInteractor {
-    func invoke(location: Location, handler: @escaping (Result<Void, Error>) -> Void) {
-        let realm = try! Realm()
-        realm.writeAsync {
-            realm.delete(location)
-        } onComplete: { error in
-            if let error = error {
-                handler(.failure(error))
-            } else {
-                handler(.success(()))
-            }
-        }
+    func invoke(location: LocationModel) {
+        guard let app = UIApplication.shared.delegate as? AppDelegate else { fatalError() }
+        let viewContext = app.persistentContainer.viewContext
+        
+        viewContext.delete(location)
+        
+        app.saveChanges()
     }
 }

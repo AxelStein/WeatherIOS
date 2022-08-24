@@ -10,7 +10,7 @@ import Foundation
 class GetDailyForecastInteractor {
     private let dataLoader = DataLoader()
     
-    func invoke(location: Location, handler: @escaping (Result<DailyForecast, Error>) -> Void) {
+    func invoke(location: LocationModel, handler: @escaping (Result<DailyForecast, Error>) -> Void) {
         dataLoader.request(endpoint: .getDailyForecast(location: location)) { result in
             switch result {
             case .success(let data):

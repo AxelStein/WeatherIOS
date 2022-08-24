@@ -15,7 +15,7 @@ struct Endpoint {
 }
 
 extension Endpoint {
-    static func getDailyForecast(location: Location) -> Endpoint {
+    static func getDailyForecast(location: LocationModel) -> Endpoint {
         return Endpoint(
             path: "/v2.0/forecast/daily",
             queryItems: [
@@ -28,7 +28,7 @@ extension Endpoint {
         )
     }
     
-    static func getCurrentWeather(location: Location) -> Endpoint {
+    static func getCurrentWeather(location: LocationModel) -> Endpoint {
         return Endpoint(
             path: "/v2.0/current",
             queryItems: [
