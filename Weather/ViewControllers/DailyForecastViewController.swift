@@ -127,6 +127,7 @@ extension DailyForecastViewController {
             
             switch result {
             case .success(let forecast):
+                self.hideErrorMessgae()
                 self.dailyForecast = forecast
                 
             case .failure(let error):
@@ -160,5 +161,10 @@ extension DailyForecastViewController {
         if let errorView = self.errorView {
             errorView.messageLabel.text = message
         }
+    }
+    
+    func hideErrorMessgae() {
+        self.errorView?.removeFromSuperview()
+        self.errorView = nil
     }
 }
