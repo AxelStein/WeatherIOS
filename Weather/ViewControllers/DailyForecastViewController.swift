@@ -40,17 +40,11 @@ class DailyForecastViewController: UITableViewController, LocationsDelegate {
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if indexPath.section == 0 {
-            return nil
-        }
-        return indexPath
+        return indexPath.section == 0 ? nil : indexPath
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }
-        return dailyForecast!.data.count
+        return section == 0 ? 1 : dailyForecast!.data.count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
