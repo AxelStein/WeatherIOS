@@ -10,8 +10,7 @@ import CoreData
 
 class DailyForecastViewController: UITableViewController, LocationsDelegate {
     private let getLocations = GetLocationsInteractor()
-    private let getCurrentWeather = GetCurrentWeatherInteractor()
-    private let getDailyForecast = GetDailyForecastInteractor()
+    private let getForecast = GetForecastInteractor()
     
     private var loadingAlert: UIAlertController? = nil
     private var currentWeather: CurrentWeather?
@@ -34,7 +33,7 @@ class DailyForecastViewController: UITableViewController, LocationsDelegate {
     
     @objc func refreshData(refreshControl: UIRefreshControl) {
         if let currentLocation = currentLocation {
-            fetchCurrentWeather(at: currentLocation, showAlert: false)
+            fetchForecast(at: currentLocation, showAlert: false)
         } else {
             refreshControl.endRefreshing()
         }
@@ -98,7 +97,7 @@ class DailyForecastViewController: UITableViewController, LocationsDelegate {
     func setCurrentLocation(_ location: LocationModel) {
         currentLocation = location
         navigationItem.title = location.title
-        fetchCurrentWeather(at: location)
+        fetchForecast(at: location)
     }
 }
 
@@ -114,29 +113,26 @@ extension UITableViewCell {
 
 extension DailyForecastViewController {
     
-    func fetchCurrentWeather(at location: LocationModel, showAlert: Bool = true) {
+    func fetchForecast(at location: LocationModel, showAlert: Bool = true) {
         if showAlert {
             self.loadingAlert = showActivityIndicatorAlert()
         }
         
-        getCurrentWeather.invoke(location: location) { weather in
-            self.currentWeather = weather
-            self.fetchDailyForecast(at: location)
-        }
-    }
-    
-    func fetchDailyForecast(at location: LocationModel) {
-        getDailyForecast.invoke(location: location) { result in
-            self.loadingAlert?.dismiss(animated: true)
+        getForecast.invoke(location: location) { result in
+            self.loadingAlert?.dismiss(animated: false)
+            self.loadingAlert = nil
             self.tableView.refreshControl?.endRefreshing()
             
             switch result {
             case .success(let forecast):
                 self.hideErrorMessgae()
-                self.dailyForecast = forecast
+                self.currentWeather = forecast.0
+                self.dailyForecast = forecast.1
                 
             case .failure(let error):
+                self.currentWeather = nil
                 self.dailyForecast = nil
+                
                 if let dataLoaderError = error as? DataLoaderError {
                     switch dataLoaderError {
                     case .invalidURL:

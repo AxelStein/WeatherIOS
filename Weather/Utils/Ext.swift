@@ -126,7 +126,7 @@ extension UIViewController {
         activityIndicator.centerXAnchor.constraint(equalTo: alert.view.centerXAnchor, constant: 0).isActive = true
         activityIndicator.bottomAnchor.constraint(equalTo: alert.view.bottomAnchor, constant: -20).isActive = true
                 
-        present(alert, animated: true)
+        present(alert, animated: false)
         return alert
     }
 }

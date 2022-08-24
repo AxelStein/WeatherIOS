@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E230" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="DailyForecastModel" representedClassName="DailyForecastModel" syncable="YES" codeGenerationType="class">
-        <attribute name="data" optional="YES" attributeType="Binary"/>
+    <entity name="ForecastModel" representedClassName="ForecastModel" syncable="YES" codeGenerationType="class">
+        <attribute name="currentWeatherData" optional="YES" attributeType="Binary"/>
+        <attribute name="dailyForecastData" optional="YES" attributeType="Binary"/>
         <attribute name="lastFetchTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="location" maxCount="1" deletionRule="No Action" destinationEntity="LocationModel"/>
     </entity>
@@ -12,7 +13,7 @@
     </entity>
     <fetchRequest name="fetchAllLocations" entity="LocationModel"/>
     <elements>
+        <element name="ForecastModel" positionX="0" positionY="72" width="128" height="89"/>
         <element name="LocationModel" positionX="-45" positionY="0" width="128" height="74"/>
-        <element name="DailyForecastModel" positionX="0" positionY="72" width="128" height="74"/>
     </elements>
 </model>
