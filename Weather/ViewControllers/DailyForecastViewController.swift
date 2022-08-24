@@ -17,12 +17,8 @@ class DailyForecastViewController: UITableViewController, LocationsDelegate {
     private var dailyForecast: DailyForecast?
     private var errorView: ErrorMessageView? = nil
     private var currentLocation: LocationModel? = nil
-    var container: NSPersistentContainer!
     
     override func viewDidLoad() {
-        guard let app = UIApplication.shared.delegate as? AppDelegate else { fatalError() }
-        container = app.persistentContainer
-        
         if let location = getLocations.invoke()?.first {
             self.setCurrentLocation(location)
         }
@@ -134,14 +130,7 @@ extension DailyForecastViewController {
                 self.currentWeather = nil
                 self.dailyForecast = nil
                 
-                if let dataLoaderError = error as? DataLoaderError {
-                    switch dataLoaderError {
-                    case .invalidURL:
-                        self.showErrorMessage("Invalid URL")
-                    case .network(let e):
-                        self.showErrorMessage(e?.localizedDescription ?? "Network error")
-                    }
-                } else if let apiError = error as? ApiError {
+                if let apiError = error as? ApiError {
                     self.showErrorMessage(apiError.statusMessage)
                 } else {
                     self.showErrorMessage(error.localizedDescription)
@@ -153,16 +142,9 @@ extension DailyForecastViewController {
     
     func showErrorMessage(_ message: String) {
         if errorView == nil {
-            let guide = view.safeAreaLayoutGuide
-            let width = guide.layoutFrame.size.width
-            let height = guide.layoutFrame.size.height
-            
-            errorView = ErrorMessageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
-            self.view.addSubview(errorView!)
+            errorView = showErrorMessageView()
         }
-        if let errorView = self.errorView {
-            errorView.messageLabel.text = message
-        }
+        self.errorView!.messageLabel.text = message
     }
     
     func hideErrorMessgae() {

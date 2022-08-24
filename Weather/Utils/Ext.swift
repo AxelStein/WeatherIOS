@@ -129,6 +129,16 @@ extension UIViewController {
         present(alert, animated: false)
         return alert
     }
+    
+    func showErrorMessageView() -> ErrorMessageView {
+        let guide = view.safeAreaLayoutGuide
+        let width = guide.layoutFrame.size.width
+        let height = guide.layoutFrame.size.height
+        
+        let errorView = ErrorMessageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        self.view.addSubview(errorView)
+        return errorView
+    }
 }
 
 postfix operator ~

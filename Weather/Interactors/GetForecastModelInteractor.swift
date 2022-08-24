@@ -9,18 +9,28 @@ import UIKit
 import CoreData
 
 class GetForecastModelInteractor {
-    func invoke(location: LocationModel) -> (CurrentWeather, DailyForecast)? {
-        let jsonDecoder = JSONDecoder()
+    private let jsonDecoder: JSONDecoder!
+    private let app: AppDelegate!
+    private let viewContext: NSManagedObjectContext!
+    
+    init() {
+        jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         
-        guard let app = UIApplication.shared.delegate as? AppDelegate else { fatalError() }
-        let viewContext = app.persistentContainer.viewContext
-        
+        app = UIApplication.shared.delegate as? AppDelegate
+        viewContext = app.persistentContainer.viewContext
+    }
+    
+    func invoke(at location: LocationModel) -> ForecastModel? {
         let request = NSFetchRequest<ForecastModel>(entityName: "ForecastModel")
         request.fetchLimit = 1
         request.predicate = NSPredicate(format: "location = %@", location)
         
-        if let model = try? viewContext.fetch(request).first {
+        return try? viewContext.fetch(request).first
+    }
+    
+    func invoke(location: LocationModel) -> (CurrentWeather, DailyForecast)? {
+        if let model = self.invoke(at: location) {
             let minutesUntilNow = model.lastFetchTime?.minutesUntilNow ?? 0
             if minutesUntilNow < 30 {
                 let currentWeather = try! jsonDecoder.decode(CurrentWeather.self, from: model.currentWeatherData!)
