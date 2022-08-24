@@ -53,6 +53,12 @@ extension Date {
     var dateTimeText: String {
         return "\(dateText) \("at"~) \(timeText)"
     }
+    
+    var minutesUntilNow: Int {
+        let now = Date()
+        let components = Calendar.current.dateComponents([.minute], from: self, to: now)
+        return components.minute ?? 0
+    }
 }
 
 extension String {
