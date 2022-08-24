@@ -17,7 +17,6 @@
 		FA567B5028B170240033B58D /* LocationItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA567B4F28B170240033B58D /* LocationItemCell.swift */; };
 		FA567B5228B171CA0033B58D /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA567B5128B171CA0033B58D /* LocationsViewController.swift */; };
 		FA567B5428B172320033B58D /* GetLocationsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA567B5328B172320033B58D /* GetLocationsInteractor.swift */; };
-		FA567B5628B17D0F0033B58D /* GetCurrentWeatherInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA567B5528B17D0F0033B58D /* GetCurrentWeatherInteractor.swift */; };
 		FA83BFFF28AAD9F500D4B023 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA83BFFE28AAD9F500D4B023 /* WeatherData.swift */; };
 		FA8DD88128B23C73003D72BB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8DD88028B23C73003D72BB /* MapKit.framework */; };
 		FA8DD88328B23D1E003D72BB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DD88228B23D1E003D72BB /* MapViewController.swift */; };
@@ -52,7 +51,6 @@
 		FA567B4F28B170240033B58D /* LocationItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationItemCell.swift; sourceTree = "<group>"; };
 		FA567B5128B171CA0033B58D /* LocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
 		FA567B5328B172320033B58D /* GetLocationsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLocationsInteractor.swift; sourceTree = "<group>"; };
-		FA567B5528B17D0F0033B58D /* GetCurrentWeatherInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCurrentWeatherInteractor.swift; sourceTree = "<group>"; };
 		FA83BFFE28AAD9F500D4B023 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		FA8DD88028B23C73003D72BB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		FA8DD88228B23D1E003D72BB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -187,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				FA567B5328B172320033B58D /* GetLocationsInteractor.swift */,
-				FA567B5528B17D0F0033B58D /* GetCurrentWeatherInteractor.swift */,
 				FA8DD88428B245EE003D72BB /* AddLocationInteractor.swift */,
 				FAB24B2A28B4354F00B4EBA4 /* RemoveLocationInteractor.swift */,
 				FA15FA8828B6870F007DE190 /* GetForecastInteractor.swift */,
@@ -275,7 +272,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA567B5628B17D0F0033B58D /* GetCurrentWeatherInteractor.swift in Sources */,
 				FA15FA8928B6870F007DE190 /* GetForecastInteractor.swift in Sources */,
 				FA35F12A28AD804700632205 /* Endpoint.swift in Sources */,
 				FAB24B2B28B4354F00B4EBA4 /* RemoveLocationInteractor.swift in Sources */,

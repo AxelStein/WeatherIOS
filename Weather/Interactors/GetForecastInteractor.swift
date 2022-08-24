@@ -34,7 +34,14 @@ class GetForecastInteractor {
         
         self.cancellable = Publishers.Zip(currentWeatherPublisher, getDailyForecastPublisher)
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in }, receiveValue: { currentWeatherOutput, dailyForecastOutput in
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    handler(.failure(error))
+                case .finished:
+                    print("finished")
+                }
+            }, receiveValue: { currentWeatherOutput, dailyForecastOutput in
                 print("### fetch from network \(location.title)")
                 
                 let currentWeatherData = currentWeatherOutput.data
@@ -43,13 +50,18 @@ class GetForecastInteractor {
                 self.saveForecastModel.invoke(
                     location: location,
                     currentWeatherData: currentWeatherData,
-                    dailyForecastData: dailyForecastData)
+                    dailyForecastData: dailyForecastData
+                )
                 
                 if let currentWeather = try? self.jsonDecoder.decode(CurrentWeather.self, from: currentWeatherData),
                    let dailyForecast = try? self.jsonDecoder.decode(DailyForecast.self, from: dailyForecastData) {
                     handler(.success((currentWeather, dailyForecast)))
+                } else if let apiError = try? self.jsonDecoder.decode(ApiError.self, from: currentWeatherData) {
+                    handler(.failure(apiError))
+                } else if let apiError = try? self.jsonDecoder.decode(ApiError.self, from: dailyForecastData) {
+                    handler(.failure(apiError))
                 } else {
-                    handler(.failure(ApiError(statusCode: 101, statusMessage: "Error")))
+                    handler(.failure(ApiError(statusCode: 0, statusMessage: "Unknown error")))
                 }
             })
     }

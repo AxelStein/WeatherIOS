@@ -124,10 +124,11 @@ extension DailyForecastViewController {
             self.tableView.refreshControl?.endRefreshing()
             
             switch result {
-            case .success(let forecast):
+            case .success(let data):
+                let (weather, forecast) = data
                 self.hideErrorMessgae()
-                self.currentWeather = forecast.0
-                self.dailyForecast = forecast.1
+                self.currentWeather = weather
+                self.dailyForecast = forecast
                 
             case .failure(let error):
                 self.currentWeather = nil
