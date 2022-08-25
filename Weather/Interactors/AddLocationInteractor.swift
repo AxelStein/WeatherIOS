@@ -19,6 +19,7 @@ class AddLocationInteractor {
         model.title = title
         model.lat = lat
         model.lon = lon
+        model.position = 0
         
         app.saveChanges()
     }

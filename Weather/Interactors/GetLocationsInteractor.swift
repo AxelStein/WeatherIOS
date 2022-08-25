@@ -16,16 +16,9 @@ class GetLocationsInteractor {
         guard let app = UIApplication.shared.delegate as? AppDelegate else { fatalError() }
         let viewContext = app.persistentContainer.viewContext
 
-        let objectModel = viewContext.persistentStoreCoordinator?.managedObjectModel
-        guard let fetchRequest = objectModel?.fetchRequestTemplate(forName: "fetchAllLocations") as? NSFetchRequest<LocationModel> else { return nil }
+        let request = NSFetchRequest<LocationModel>(entityName: "LocationModel")
+        request.sortDescriptors = [NSSortDescriptor(key: "position", ascending: true)]
         
-        do {
-            let result = try viewContext.fetch(fetchRequest)
-            return result
-        } catch {
-            print(error)
-        }
-        
-        return nil
+        return try? viewContext.fetch(request)
     }
 }

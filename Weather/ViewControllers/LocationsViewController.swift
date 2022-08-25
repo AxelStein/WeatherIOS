@@ -29,10 +29,25 @@ class LocationsViewController: UITableViewController, MapViewDelegate {
         tableView.reloadData()
     }
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        if !editing, let locations = locations {
+            for (position, location) in locations.enumerated() {
+                location.position = Int32(position)
+            }
+            
+            guard let app = UIApplication.shared.delegate as? AppDelegate else { fatalError() }
+            app.saveChanges()
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let from = sourceIndexPath.row
         let to = destinationIndexPath.row
-        locations?.swapAt(from, to)
+        if let location = locations?.remove(at: from) {
+            locations?.insert(location, at: to)
+        }
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
