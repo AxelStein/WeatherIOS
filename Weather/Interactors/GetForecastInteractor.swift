@@ -21,7 +21,6 @@ class GetForecastInteractor {
     
     func invoke(location: LocationModel, handler: @escaping (Result<(CurrentWeather, DailyForecast), Error>) -> Void) {
         if let forecastModel = getForecastModel.invoke(location: location) {
-            print("### get from core data \(location.title)")
             handler(.success(forecastModel))
             return
         }
@@ -39,10 +38,9 @@ class GetForecastInteractor {
                 case .failure(let error):
                     handler(.failure(error))
                 case .finished:
-                    print("finished")
+                    do {}
                 }
             }, receiveValue: { currentWeatherOutput, dailyForecastOutput in
-                print("### fetch from network \(location.title)")
                 
                 let currentWeatherData = currentWeatherOutput.data
                 let dailyForecastData = dailyForecastOutput.data

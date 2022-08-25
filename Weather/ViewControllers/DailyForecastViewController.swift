@@ -109,8 +109,10 @@ extension DailyForecastViewController {
         }
         
         getForecast.invoke(location: location) { result in
-            self.loadingAlert?.dismiss(animated: false)
-            self.loadingAlert = nil
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.loadingAlert?.dismiss(animated: false)
+                self.loadingAlert = nil
+            }
             self.tableView.refreshControl?.endRefreshing()
             
             switch result {
