@@ -19,6 +19,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     private let getLocations = GetLocationsInteractor()
     private let addLocation = AddLocationInteractor()
     private var currentTitle = ""
+    private var currentCountryCode = ""
     var delegate: MapViewDelegate? = nil
     
     override func viewDidLoad() {
@@ -59,7 +60,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     private func addLocationImplAndClose(with title: String, point: MKPointAnnotation) {
-        self.addLocation.invoke(title: title, lat: point.coordinate.latitude, lon: point.coordinate.longitude)
+        self.addLocation.invoke(title: title, countryCode: currentCountryCode, lat: point.coordinate.latitude, lon: point.coordinate.longitude)
         self.delegate?.addLocation()
         self.navigationController?.popViewController(animated: true)
     }
@@ -73,8 +74,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let location = CLLocation(latitude: locationCoordinate.latitude, longitude: locationCoordinate.longitude)
         geocoder.reverseGeocodeLocation(location) { marks, error in
             if let city = marks?.first?.locality,
-               let c = marks?.first?.isoCountryCode {
-                self.currentTitle = "\(city), \(c)"
+               let countryCode = marks?.first?.isoCountryCode {
+                self.currentTitle = city
+                self.currentCountryCode = countryCode
             }
         }
         

@@ -95,7 +95,7 @@ class LocationsViewController: UITableViewController, MapViewDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let location = locations![indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationItemCell", for: indexPath) as! LocationItemCell
-        cell.titleLabel.text = location.title
+        cell.setItem(location)
         return cell
     }
     
